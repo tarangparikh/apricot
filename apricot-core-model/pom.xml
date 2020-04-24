@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>apricot</artifactId>
+    <groupId>com.apricot</groupId>
+    <version>1.0.0</version>
+  </parent>
 
-  <groupId>com.apricot</groupId>
-  <artifactId>apricot</artifactId>
+
+  <artifactId>apricot-core-model</artifactId>
   <version>1.0.0</version>
-  <!-- POM packaging to show that it is the root directory that contains other sub modules -->
-  <packaging>pom</packaging>
-
-  <name>apricot</name>
+  <packaging>jar</packaging>
+  <name>apricot-core-model</name>
   <!-- FIXME change it to the project's website -->
   <url>https://www.apricot.xyz</url>
 
@@ -16,42 +19,33 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <apricot.version>${project.version}</apricot.version>
   </properties>
 
-  <modules>
-    <module>apricot-core-model</module>
-    <module>apricot-core</module>
-  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
 
+    <!-- Spring Data JPA -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>2.2.6.RELEASE</version>
+    </dependency>
 
-
-  <!-- Depenency Management used for global dependency declaration -->
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.11</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.apricot</groupId>
-        <artifactId>apricot-core</artifactId>
-        <version>${apricot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.apricot</groupId>
-        <artifactId>apricot-core-model</artifactId>
-        <version>${apricot.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  </dependencies>
 
   <build>
-    <pluginManagement>
-      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -94,5 +88,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
 </project>

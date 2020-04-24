@@ -1,56 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>apricot</artifactId>
+    <groupId>com.apricot</groupId>
+    <version>1.0.0</version>
+  </parent>
 
-  <groupId>com.apricot</groupId>
-  <artifactId>apricot</artifactId>
+  <artifactId>apricot-core</artifactId>
   <version>1.0.0</version>
-  <!-- POM packaging to show that it is the root directory that contains other sub modules -->
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
-  <name>apricot</name>
+  <name>apricot-core</name>
   <!-- FIXME change it to the project's website -->
-  <url>https://www.apricot.xyz</url>
+  <url>https://www.apricot.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <apricot.version>${project.version}</apricot.version>
   </properties>
 
-  <modules>
-    <module>apricot-core-model</module>
-    <module>apricot-core</module>
-  </modules>
-
-
-
-  <!-- Depenency Management used for global dependency declaration -->
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.11</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.apricot</groupId>
-        <artifactId>apricot-core</artifactId>
-        <version>${apricot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.apricot</groupId>
-        <artifactId>apricot-core-model</artifactId>
-        <version>${apricot.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.apricot</groupId>
+      <artifactId>apricot-core-model</artifactId>
+    </dependency>
+  </dependencies>
 
   <build>
-    <pluginManagement>
-      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
@@ -94,5 +79,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
 </project>
