@@ -7,7 +7,7 @@
     <version>1.0.0</version>
   </parent>
 
-
+  <packaging>jar</packaging>
   <artifactId>apricot-core-model</artifactId>
   <version>1.0.0</version>
   <name>apricot-core-model</name>
