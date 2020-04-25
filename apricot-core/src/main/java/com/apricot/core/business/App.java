@@ -1,6 +1,6 @@
 package com.apricot.core.business;
 
-import com.apricot.core.model.User;
+import com.apricot.core.model.user.User;
 
 /**
  * Hello world!
