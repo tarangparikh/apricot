@@ -38,10 +38,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-{{ checksum "apricot-core/pom.xml" }}
-            - v1-dependencies-{{ checksum "apricot-core-model/pom.xml" }}
+          key: v1-dependencies-{{ checksum "pom.xml" }}-{{ checksum "apricot-core/pom.xml" }}-{{ checksum "apricot-core-model/pom.xml" }}
 
       # run tests!
       - run: mvn integration-test
