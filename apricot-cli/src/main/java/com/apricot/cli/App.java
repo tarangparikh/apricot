@@ -5,6 +5,7 @@ import com.apricot.core.business.repositories.user.UserRepository;
 import com.apricot.core.model.user.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -25,7 +26,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan({"com.apricot.core.model"})
 public class App
 {
+    final
+    UserRepository userRepository;
+
     public static Logger logger = LogManager.getLogger(App.class);
+
+    public App(@Autowired UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public static void main( String[] args )
     {
         SpringApplication.run(App.class,args);
@@ -34,10 +43,12 @@ public class App
     public CommandLineRunner commandLineRunner(UserRepository userRepository,
                                                CompanyRepository companyRepository) {
         return args -> {
-            System.out.println(companyRepository.findAll());
-            userRepository.save(new User("tarang","tarang"));
-            System.out.println(userRepository.findByUserName("tarang"));
 
+                User user = new User();
+                user.setEmail("tp");
+                user.setPassWord("pass");
+                userRepository.save(user);
+                System.out.println(userRepository.findAll()+" Application");
 
 
 

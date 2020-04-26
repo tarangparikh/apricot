@@ -23,4 +23,6 @@ import java.util.List;
 public interface CompanyRepository extends JpaRepository<Company,Long> {
     List<Company> findAllByBusinessName(String business);
     List<Company> findAllByUser(User user);
+    Company findByUserAndBusinessName(User user,String businessName);
+
 }

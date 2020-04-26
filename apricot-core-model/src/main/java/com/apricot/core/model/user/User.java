@@ -15,31 +15,36 @@ import javax.persistence.*;
 @Entity
 @Table
 public class User {
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column int id;
-    private String userName;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column Integer id;
+    private String email;
     private String passWord;
 
-    protected User(){ }
 
-    public User(String userName,String passWord){
-        this.userName = userName;
-        this.passWord = passWord;
+    public User(){ }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", passWord='" + passWord + '\'' +
+                '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassWord() {
@@ -48,14 +53,5 @@ public class User {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
-                '}';
     }
 }
