@@ -17,11 +17,12 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Party {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String phoneNumber;
     private String email;
-    private String address;
+    private String billingAddress;
+    private String shippingAddress;
+    private Long balance;
     @Enumerated(EnumType.STRING) private PartyType partyType;
     private String gstInNumber;
     @OneToOne private Company company;

@@ -1,5 +1,11 @@
-package com.apricot.core.model.units;
-/* 
+package com.apricot.core.model.stock;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+/*
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
     
@@ -9,15 +15,11 @@ package com.apricot.core.model.units;
     Original Author : @author Tarang Parikh <tp0265@gmail.com>
     
 */
-
-import com.apricot.core.model.company.Company;
-
-import javax.persistence.*;
-
 @Entity
-public class Unit {
+public class Stock {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    private String fullName;
-    private String shortName;
-    @OneToOne private Company company;
+    private Long quantity;
+    private Long minimumQuntity;
+    private Long value;
+    private String location;
 }

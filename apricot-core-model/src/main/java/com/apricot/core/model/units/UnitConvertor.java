@@ -1,5 +1,8 @@
 package com.apricot.core.model.units;
-/* 
+
+import javax.persistence.*;
+
+/*
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
     
@@ -9,15 +12,10 @@ package com.apricot.core.model.units;
     Original Author : @author Tarang Parikh <tp0265@gmail.com>
     
 */
-
-import com.apricot.core.model.company.Company;
-
-import javax.persistence.*;
-
 @Entity
-public class Unit {
+public class UnitConvertor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    private String fullName;
-    private String shortName;
-    @OneToOne private Company company;
+    @OneToOne private Unit primaryUnit;
+    @OneToOne private Unit secondaryUnit;
+    private Double conversionRate;
 }

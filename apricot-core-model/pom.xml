@@ -7,9 +7,10 @@
     <version>1.0.0</version>
   </parent>
 
-  <packaging>jar</packaging>
+
   <artifactId>apricot-core-model</artifactId>
   <version>1.0.0</version>
+
   <name>apricot-core-model</name>
   <!-- FIXME change it to the project's website -->
   <url>https://www.apricot.xyz</url>
@@ -33,6 +34,18 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
       <version>2.2.6.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
     </dependency>
 
   </dependencies>

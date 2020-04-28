@@ -1,4 +1,4 @@
-package com.apricot.core.model.units;
+package com.apricot.core.model.gst;
 /* 
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
@@ -10,14 +10,12 @@ package com.apricot.core.model.units;
     
 */
 
-import com.apricot.core.model.company.Company;
-
 import javax.persistence.*;
 
 @Entity
-public class Unit {
+@Table
+public class Gst {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-    private String fullName;
-    private String shortName;
-    @OneToOne private Company company;
+    @Enumerated(EnumType.STRING) private GstType gstType;
+    private Long gstRate;
 }

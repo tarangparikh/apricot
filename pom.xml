@@ -28,7 +28,6 @@
   <modules>
     <module>apricot-core-model</module>
     <module>apricot-core</module>
-    <module>apricot-cli</module>
     <module>apricot-web</module>
   </modules>
 
@@ -106,6 +105,20 @@
             <downloadSources>false</downloadSources>
             <downloadJavadoc>false</downloadJavadoc>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+              <configuration>
+                <classifier>exec</classifier>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
