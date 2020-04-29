@@ -47,5 +47,9 @@ jobs:
       - store_test_results:
           path:
             - apricot-web/target/surefire-reports
+      - store_test_results:
+          path:
             - apricot-core/target/surefire-reports
+      - store_test_results:
+          path:
             - apricot-core-model/target/surefire-reports
