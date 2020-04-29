@@ -42,12 +42,7 @@ jobs:
 
       # run tests!
       - run: mvn integration-test
-      - run: mkdir test-result
-      - run: cp apricot-web/target/surefire-reports test-result
-
 
       # store tests!
       - store_test_results:
-          path:
-            - apricot-web/target/surefire-reports
-
+          path: apricot-web/target/surefire-reports
