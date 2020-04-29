@@ -45,4 +45,4 @@ jobs:
 
       # store tests!
       - store_test_results:
-          path: test-results
+          path: apricot-web/target/surefire-reports
