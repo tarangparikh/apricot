@@ -41,9 +41,11 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run:
-          - command: mvn integration-test
-      
+      - run: mvn integration-test
+      - run: mkdir test-result
+      - run: cp apricot-web/target/surefire-reports test-result
+
+
       # store tests!
       - store_test_results:
           path:
