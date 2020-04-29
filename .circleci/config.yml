@@ -45,4 +45,7 @@ jobs:
 
       # store tests!
       - store_test_results:
-          path: apricot-web/target/surefire-reports
+          paths:
+            - apricot-web/target/surefire-reports
+            - apricot-core/target/surefire-reports
+            - apricot-core-model/target/surefire-reports
