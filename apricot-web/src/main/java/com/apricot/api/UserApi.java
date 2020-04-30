@@ -35,9 +35,13 @@ public class UserApi {
     @GetMapping("/random")
     public Integer insert(){
         User user = new User();
-        user.setEmail("tarnag");
+        user.setEmail("himani");
         user.setPassWord("tarang");
         User save = userRepository.save(user);
         return save.getId();
     }
 }
+
+
+
+

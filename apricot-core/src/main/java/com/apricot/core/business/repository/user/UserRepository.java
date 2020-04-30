@@ -7,7 +7,7 @@ package com.apricot.core.business.repository.user;
     Project Home : https://github.com/tarangparikh/apricot
     
     Original Author : @author Tarang Parikh <tp0265@gmail.com>
-    
+
 */
 
 
@@ -16,3 +16,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User,Long>{
 }
+
