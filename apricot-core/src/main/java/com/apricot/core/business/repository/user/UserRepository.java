@@ -7,7 +7,7 @@ package com.apricot.core.business.repository.user;
     Project Home : https://github.com/tarangparikh/apricot
     
     Original Author : @author Tarang Parikh <tp0265@gmail.com>
-    
+
 */
 
 
@@ -18,3 +18,4 @@ public interface UserRepository extends JpaRepository<User,Long>{
         User findByEmail(String email);
 
 }
+
