@@ -10,5 +10,9 @@ package com.apricot.core.business.repository.company;
     
 */
 
-public class CompanyRepository {
+import com.apricot.core.model.company.Company;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CompanyRepository extends JpaRepository<Company,Long> {
+
 }

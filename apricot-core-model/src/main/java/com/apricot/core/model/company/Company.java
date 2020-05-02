@@ -11,8 +11,11 @@ package com.apricot.core.model.company;
 */
 
 import com.apricot.core.model.user.User;
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table
 public class Company {
@@ -29,95 +32,4 @@ public class Company {
     private String accountNumber;
     private String ifscCode;
     @OneToOne private User user;
-
-    public Company() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBusinessName() {
-        return businessName;
-    }
-
-    public void setBusinessName(String businessName) {
-        this.businessName = businessName;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getGstInNumber() {
-        return gstInNumber;
-    }
-
-    public void setGstInNumber(String gstInNumber) {
-        this.gstInNumber = gstInNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getIfscCode() {
-        return ifscCode;
-    }
-
-    public void setIfscCode(String ifscCode) {
-        this.ifscCode = ifscCode;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

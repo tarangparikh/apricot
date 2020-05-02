@@ -40,4 +40,9 @@ public class UserApi {
         User save = userRepository.save(user);
         return save.getId();
     }
+
+    @GetMapping("/{email}")
+    public User getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
 }

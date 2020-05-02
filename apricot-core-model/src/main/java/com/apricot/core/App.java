@@ -10,8 +10,11 @@ package com.apricot.core;
     
 */
 
+import com.apricot.core.model.user.User;
+
 public class App {
     public static void main(String[] args){
+        User user = new User();
 
     }
 }
