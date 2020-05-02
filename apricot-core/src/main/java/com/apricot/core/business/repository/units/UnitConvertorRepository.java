@@ -9,7 +9,6 @@ package com.apricot.core.business.repository.units;
     Original Author : @author Tarang Parikh <tp0265@gmail.com>
     
 */
-
 import com.apricot.core.model.units.UnitConvertor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
