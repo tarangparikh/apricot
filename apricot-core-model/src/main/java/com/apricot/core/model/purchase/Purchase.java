@@ -10,8 +10,11 @@ package com.apricot.core.model.purchase;
 
 */
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table
 public class Purchase {
@@ -21,5 +24,6 @@ public class Purchase {
     @Enumerated(EnumType.STRING) private PurchaseType purchaseType;
     private String state;
     private String description;
+
 
 }
