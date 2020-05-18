@@ -30,8 +30,8 @@
   </properties>
 
   <modules>
-    <module>apricot-web</module>
-    <module>apricot-application</module>
+    <module>apricot-frontend</module>
+    <module>apricot-backend</module>
   </modules>
 
 
@@ -81,7 +81,7 @@
                 <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                 <resources>
                   <resource>
-                    <directory>${main.basedir}/apricot-application/build</directory>
+                    <directory>${main.basedir}/apricot-frontend/build</directory>
                     <filtering>false</filtering>
                   </resource>
                 </resources>
