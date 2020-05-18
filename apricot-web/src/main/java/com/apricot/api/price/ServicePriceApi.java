@@ -1,4 +1,4 @@
-package com.apricot.core.business.repository.product;
+package com.apricot.api.price;
 /* 
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
@@ -10,8 +10,5 @@ package com.apricot.core.business.repository.product;
     
 */
 
-import com.apricot.core.model.Item.product.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public class ServicePriceApi {
 }

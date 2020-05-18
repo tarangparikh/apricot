@@ -11,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/purchase")
-public class purchaseApi {
+public class PurchaseApi {
     private final PurchaseRepository purchaseRepository;
 
-    public purchaseApi(PurchaseRepository purchaseRepository)
+    public PurchaseApi(PurchaseRepository purchaseRepository)
     {
         this.purchaseRepository = purchaseRepository;
     }

@@ -1,4 +1,4 @@
-package com.apricot.core.model.service;
+package com.apricot.core.model.Item;
 /* 
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
@@ -12,20 +12,20 @@ package com.apricot.core.model.service;
 
 import com.apricot.core.model.category.Category;
 import com.apricot.core.model.company.Company;
-import com.apricot.core.model.price.ServicePrice;
 import com.apricot.core.model.units.UnitConvertor;
+import lombok.Data;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-public class Service {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+@Inheritance
+public class Item {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String productName;
     private String itemCode;
-    @OneToOne
-    private Category category;
     private String hsnSacCode;
-    @OneToOne private ServicePrice price;
+    @OneToOne private Category category;
     @OneToOne private UnitConvertor convertor;
     @OneToOne private Company company;
 }

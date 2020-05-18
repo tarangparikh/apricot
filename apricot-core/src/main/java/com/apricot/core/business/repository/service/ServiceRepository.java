@@ -10,7 +10,7 @@ package com.apricot.core.business.repository.service;
     
 */
 
-import com.apricot.core.model.service.Service;
+import com.apricot.core.model.Item.service.Service;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ServiceRepository extends JpaRepository<Service,Long> {

@@ -19,6 +19,6 @@ import javax.persistence.*;
 @Table
 public class User {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column Integer id;
-    private String email;
+    private @Column(unique = true) String email;
     private String passWord;
 }

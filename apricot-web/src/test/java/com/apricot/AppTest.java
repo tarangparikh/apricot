@@ -2,7 +2,7 @@ package com.apricot;
 
 import static org.junit.Assert.assertTrue;
 
-import com.apricot.api.UserApi;
+import com.apricot.api.user.UserApi;
 import com.apricot.configuration.ConfigurationTest;
 
 import org.junit.Assert;
