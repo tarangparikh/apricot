@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Hello world!
  *
  */
-@SpringBootApplication
+//@SpringBootApplication
 public class App 
 {
     public static void main( String[] args )

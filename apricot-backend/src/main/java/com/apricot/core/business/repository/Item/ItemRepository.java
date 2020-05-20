@@ -1,4 +1,4 @@
-package com.apricot.core.business.repository.service;
+package com.apricot.core.business.repository.Item;
 /* 
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
@@ -10,8 +10,8 @@ package com.apricot.core.business.repository.service;
     
 */
 
-import com.apricot.core.model.item.Service;
+import com.apricot.core.model.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ServiceRepository extends JpaRepository<Service,Long> {
+public interface ItemRepository extends JpaRepository<Item,Long> {
 }

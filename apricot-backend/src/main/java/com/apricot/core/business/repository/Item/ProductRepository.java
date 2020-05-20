@@ -1,4 +1,4 @@
-package com.apricot.core.business.repository.product;
+package com.apricot.core.business.repository.Item;
 /* 
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh

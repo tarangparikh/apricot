@@ -10,10 +10,12 @@ package com.apricot.core.model.gst;
     
 */
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
-@Table
+@Data
 public class Gst {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     @Enumerated(EnumType.STRING) private GstType gstType;
