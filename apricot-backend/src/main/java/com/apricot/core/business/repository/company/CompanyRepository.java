@@ -17,4 +17,5 @@ import java.util.List;
 
 public interface CompanyRepository extends JpaRepository<Company,Long> {
     List<Company> findByUser_Id(Integer id);
+
 }
