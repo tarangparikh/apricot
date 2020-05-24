@@ -17,16 +17,17 @@ const CompanyUpdateModal = (props) => {
         ifscCode: props.company.ifscCode,
         user: props.company.user
     })
+
     const form_data = [
-        {name:'Business Name',access:'businessName'},
-        {name:'Contact Number',access:'contactNumber'},
-        {name:'GST-In Number',access:'gstInNumber'},
-        {name:'Email',access:'email'},
-        {name:'Address',access:'address'},
-        {name:'State',access:'state'},
-        {name:'Bank Name',access:'bankName'},
-        {name:'Account Number',access:'accountNumber'},
-        {name:'IFSC Code',access:'ifscCode'}
+        {name:'Business Name',access:'businessName',pattern:'(.)*'},
+        {name:'Contact Number',access:'contactNumber',pattern:"^((\\+)?(\\d{2}))?(\\d{10}){1}?$"},
+        {name:'GST-In Number',access:'gstInNumber',pattern:'(.)*'},
+        {name:'Email',access:'email',pattern:'^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'},
+        {name:'Address',access:'address',pattern:'(.)*'},
+        {name:'State',access:'state',pattern:'(.)*'},
+        {name:'Bank Name',access:'bankName',pattern:'(.)*'},
+        {name:'Account Number',access:'accountNumber',pattern:'(.)*'},
+        {name:'IFSC Code',access:'ifscCode',pattern:'(.)*'}
     ]
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -47,7 +48,6 @@ const CompanyUpdateModal = (props) => {
         }))
     }
     const make_from_data = () => {
-
         const sub_data = form_data.map(value => {
             return(
                 <tr>
@@ -58,6 +58,7 @@ const CompanyUpdateModal = (props) => {
                         <Form.Control
                             required
                             type="text"
+                            pattern={value["pattern"]}
                             placeholder={'Enter '+value["name"]}
                             defaultValue={props.company[value["access"]]}
                             onChange={event => handleChange(event,value["access"])}

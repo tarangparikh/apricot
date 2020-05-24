@@ -6,16 +6,19 @@ import CompanyViewModal from "./CompanyViewModal";
 import CompanyUpdateModal from "./CompanyUpdateModal";
 import CompanyAddModal from "./CompanyAddModal";
 
+
+
+
 class Company extends Component{
 
     //props initialize
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                 id: 1,
-                 email: "tp0265@gmail.com",
-                 password: "password"
+            user:{
+                id: 1,
+                email: 'tp0265@gmail.com',
+                password: 'password'
             },
             api_store : Constants(),
             isLoaded: false,
@@ -25,19 +28,17 @@ class Company extends Component{
     }
     //axios call
     componentDidMount() {
-        //console.log('Constructor'+' Component did mount')
         axios.get(this.state.api_store.company.viewCompany+this.state.user.id)
-            .then(value => {
-                this.setState({
-                    isLoaded: true,
-                    company: value.data,
-                })
-            }).catch(reason => {
+                .then(value => {
+                    this.setState({
+                        isLoaded: true,
+                        company: value.data,
+                    })
+                }).catch(reason => {
 
-        })
+                })
     }
     //
-
     deleteHandler = (event,index) => {
         axios.delete(this.state.api_store.company.deleteCompany+index)
             .then(r =>{
@@ -77,36 +78,36 @@ class Company extends Component{
                 alert(JSON.stringify(reason))
             })
     }
-    showCompanyViewModalShow = (index) => {
+    showCompanyViewModal = (index) => {
         let company = [...this.state.company].filter(value => value.id===index)
         this.setState({
             companyViewModalShow: true,
             currentCompany: company[0]
         })
     }
-    showCompanyUpdateModalShow = (index) => {
+    showCompanyUpdateModal = (index) => {
         let company = [...this.state.company].filter(value => value.id===index)
         this.setState({
             companyUpdateModalShow: true,
             currentCompany: company[0]
         })
     }
-    showCompanyAddModalShow = () => {
+    showCompanyAddModal = () => {
         this.setState({
             companyAddModalShow: true,
         })
     }
-    closeCompanyViewModalShow = () => {
+    closeCompanyViewModal= () => {
         this.setState({
             companyViewModalShow: false
         })
     }
-    closeCompanyUpdateModalShow = () => {
+    closeCompanyUpdateModal= () => {
         this.setState({
             companyUpdateModalShow: false
         })
     }
-    closeCompanyAddModalShow = () => {
+    closeCompanyAddModal = () => {
         this.setState({
             companyAddModalShow: false
         })
@@ -125,8 +126,8 @@ class Company extends Component{
                         <td>{c.email}</td>
                         <td>
                             <ButtonGroup aria-label="Actions">
-                                <Button variant="secondary" onClick = {() => this.showCompanyViewModalShow(c.id)}>View</Button>
-                                <Button variant="secondary"onClick = {() => this.showCompanyUpdateModalShow(c.id)}>Update</Button>
+                                <Button variant="secondary" onClick = {() => this.showCompanyViewModal(c.id)}>View</Button>
+                                <Button variant="secondary"onClick = {() => this.showCompanyUpdateModal(c.id)}>Update</Button>
                                 <Button variant="danger" onClick = {(event) => this.deleteHandler(event,c.id)}>Delete</Button>
                             </ButtonGroup>
                         </td>
@@ -140,18 +141,18 @@ class Company extends Component{
         if(this.state.currentCompany === undefined){
             return <div/>
         }else{
-            return <CompanyViewModal show={this.state.companyViewModalShow} company={this.state.currentCompany}  closeHandler={this.closeCompanyViewModalShow} />
+            return <CompanyViewModal show={this.state.companyViewModalShow} company={this.state.currentCompany}  closeHandler={this.closeCompanyViewModal} />
         }
     }
     makeCompanyUpdateModal = () => {
         if(this.state.currentCompany === undefined){
             return <div/>
         }else{
-            return <CompanyUpdateModal show={this.state.companyUpdateModalShow} company={this.state.currentCompany} updateHandler={this.updateHandler} closeHandler={this.closeCompanyUpdateModalShow} />
+            return <CompanyUpdateModal show={this.state.companyUpdateModalShow} company={this.state.currentCompany} updateHandler={this.updateHandler} closeHandler={this.closeCompanyUpdateModal} />
         }
     }
     makeCompanyAddModal = () => {
-            return <CompanyAddModal user={this.state.user.id} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModalShow}/>
+            return <CompanyAddModal user={this.state.user.id} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModal}/>
     }
 
 
@@ -167,7 +168,7 @@ class Company extends Component{
                                 <Card.Header>
                                     <h3>
                                         Company Details
-                                        <Button onClick={this.showCompanyAddModalShow} style={{float : "right"}}>Add</Button>
+                                        <Button onClick={this.showCompanyAddModal} style={{float : "right"}}>Add</Button>
                                     </h3>
                                 </Card.Header>
                                 <Card.Body>

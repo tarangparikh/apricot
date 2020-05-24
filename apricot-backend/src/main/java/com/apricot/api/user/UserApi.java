@@ -2,12 +2,15 @@ package com.apricot.api.user;
 
 import com.apricot.core.business.repository.user.UserRepository;
 import com.apricot.core.model.user.User;
+import com.google.gson.Gson;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +31,14 @@ public class UserApi {
 
     private final DataSource dataSource;
 
+    private class Result<T>{
+        boolean key;
+        T value;
+        public Result(boolean key, T value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
     public UserApi(UserRepository userRepository, DataSource applicationContext) {
         this.userRepository = userRepository;
         this.dataSource = applicationContext;
@@ -47,11 +58,19 @@ public class UserApi {
         TODO : Write the JWT Tokens Code
      */
     @PostMapping("/auth")
-    public boolean auth(@RequestBody User requestingUser){
+    public String auth(@RequestBody User requestingUser){
+        System.out.println(requestingUser);
         Optional<User> optional = userRepository.findByEmail(requestingUser.getEmail());
+        Gson gson = new Gson();
         return optional
-                .map(user -> (user.getPassWord().equals(requestingUser.getPassWord())))
-                .orElse(false);
+                .map(user -> {
+                    if(user.getPassWord().equals(requestingUser.getPassWord())){
+                        return gson.toJson(new Result<>(true,user.getId()));
+                    }else{
+                        return gson.toJson(new Result<>(false,null));
+                    }
+                })
+                .orElse(gson.toJson(new Result<>(false,null)));
     }
 
     @GetMapping("/{email}")

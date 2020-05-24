@@ -23,15 +23,15 @@ const CompanyAddModal = (props) => {
         }))
     }
     const form_data = [
-        {name:'Business Name',access:'businessName'},
-        {name:'Contact Number',access:'contactNumber'},
-        {name:'GST-In Number',access:'gstInNumber'},
-        {name:'Email',access:'email'},
-        {name:'Address',access:'address'},
-        {name:'State',access:'state'},
-        {name:'Bank Name',access:'bankName'},
-        {name:'Account Number',access:'accountNumber'},
-        {name:'IFSC Code',access:'ifscCode'}
+        {name:'Business Name',access:'businessName',pattern:'(.)*'},
+        {name:'Contact Number',access:'contactNumber',pattern:'^((\\+){0,1}91(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}98(\\s){0,1}(\\-){0,1}(\\s){0,1}[1-9]{1}[0-9]{7}$'},
+        {name:'GST-In Number',access:'gstInNumber',pattern:'(.)*'},
+        {name:'Email',access:'email',pattern:'^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'},
+        {name:'Address',access:'address',pattern:'(.)*'},
+        {name:'State',access:'state',pattern:'(.)*'},
+        {name:'Bank Name',access:'bankName',pattern:'(.)*'},
+        {name:'Account Number',access:'accountNumber',pattern:'(.)*'},
+        {name:'IFSC Code',access:'ifscCode',pattern:'(.)*'}
     ]
 
     const make_from_data = () => {
@@ -46,6 +46,7 @@ const CompanyAddModal = (props) => {
                             required
                             type="text"
                             placeholder={'Enter '+value["name"]}
+                            pattern={value["pattern"]}
                             //defaultValue={props.company[value["access"]]}
                             onChange={(event) => handleChange(event,value["access"])}
                         />
