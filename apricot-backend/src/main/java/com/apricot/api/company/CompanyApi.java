@@ -26,7 +26,7 @@ import java.util.Optional;
 public class CompanyApi {
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
-    public CompanyApi(CompanyRepository companyRepository, UserRepository userRepository){
+    public CompanyApi(CompanyRepository companyRepository, UserRepository userRepository) {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
     }
