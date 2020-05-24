@@ -3,14 +3,14 @@ const Constants = () => {
     const api_base =  "http://localhost:8080/api/";
     const api_company = "company/";
     const api_user = "user/";
-    const api_store = {
+    return {
         company: {
             //{/user_id}
-            viewCompany : api_base + api_company
-
+            viewCompany: api_base + api_company,
+            postCompany: api_base + api_company + 'post/',
+            deleteCompany: api_base + api_company + 'delete/'
         }
-    }
-    return api_store;
+    };
 }
 
 export default Constants

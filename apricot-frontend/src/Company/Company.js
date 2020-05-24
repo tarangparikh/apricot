@@ -33,11 +33,44 @@ class Company extends Component{
         })
     }
     //
-    changeHandler = (event,index) => {
-        let company = [...this.state.company].filter(value => value.id !== index)
-        this.setState({
-            company: company
-        })
+
+    deleteHandler = (event,index) => {
+        axios.delete(this.state.api_store.company.deleteCompany+index)
+            .then(r =>{
+                let company_clone = [...this.state.company].filter(v => v.id!==index)
+                this.setState({
+                    company: company_clone
+                })
+            }).catch(reason => {
+                alert(JSON.stringify(reason))
+            })
+    }
+    updateHandler = (company) => {
+        axios.post(this.state.api_store.company.postCompany+this.state.userId,company)
+            .then(response => {
+                let updated_company = response.data;
+                let company_clone = [...this.state.company].map(obj => {
+                    return updated_company.id === obj.id ? company : obj;
+                });
+                this.setState({
+                    company: company_clone
+                })
+                alert('updated')
+            }).catch(reason => {
+                alert(JSON.stringify(reason))
+            })
+    }
+    addHandler = (company) => {
+        axios.post(this.state.api_store.company.postCompany+this.state.userId,company)
+            .then(response => {
+                let company_clone = [...this.state.company];
+                company_clone.push(response.data);
+                this.setState({
+                    company: company_clone
+                })
+            }).catch(reason => {
+                alert(JSON.stringify(reason))
+            })
     }
     showCompanyViewModalShow = (index) => {
         let company = [...this.state.company].filter(value => value.id===index)
@@ -89,7 +122,7 @@ class Company extends Component{
                             <ButtonGroup aria-label="Actions">
                                 <Button variant="secondary" onClick = {() => this.showCompanyViewModalShow(c.id)}>View</Button>
                                 <Button variant="secondary"onClick = {() => this.showCompanyUpdateModalShow(c.id)}>Update</Button>
-                                <Button variant="danger">Delete</Button>
+                                <Button variant="danger" onClick = {(event) => this.deleteHandler(event,c.id)}>Delete</Button>
                             </ButtonGroup>
                         </td>
                     </tr>
@@ -109,11 +142,11 @@ class Company extends Component{
         if(this.state.currentCompany === undefined){
             return <div/>
         }else{
-            return <CompanyUpdateModal show={this.state.companyUpdateModalShow} company={this.state.currentCompany}  closeHandler={this.closeCompanyUpdateModalShow} />
+            return <CompanyUpdateModal show={this.state.companyUpdateModalShow} company={this.state.currentCompany} updateHandler={this.updateHandler} closeHandler={this.closeCompanyUpdateModalShow} />
         }
     }
     makeCompanyAddModal = () => {
-            return <CompanyAddModal show = {this.state.companyAddModalShow} closeHandler={this.closeCompanyAddModalShow}/>
+            return <CompanyAddModal user={this.state.userId} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModalShow}/>
     }
 
 

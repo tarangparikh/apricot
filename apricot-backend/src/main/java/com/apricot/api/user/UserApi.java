@@ -60,12 +60,12 @@ public class UserApi {
     }
 
     @PostMapping("/post")
-    public Integer  postUser(@RequestBody User user){
+    public Long  postUser(@RequestBody User user){
         return userRepository.save(user).getId();
     }
 
     @GetMapping("/random")
-    public Integer insert(){
+    public Long insert(){
         User user = new User();
         user.setEmail("himani");
         user.setPassWord("tarang");

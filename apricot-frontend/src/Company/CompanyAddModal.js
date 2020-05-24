@@ -2,20 +2,26 @@ import React, {useState} from "react";
 import {Button, Form, Modal, Table} from "react-bootstrap";
 const CompanyAddModal = (props) => {
     const [validated, setValidated] = useState(false);
-
+    const [company,setCompany] = useState({});
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
         }else{
-            setValidated(true);
-            alert('submiting')
-
+            //alert('submiting')
+            props.addHandler(company)
         }
+        setValidated(true)
 
     };
-
+    const handleChange = (event,attribute) => {
+        let obj = {}
+        obj[attribute] = event.target.value;
+        setCompany((prevState => {
+            return {...prevState,...obj}
+        }))
+    }
     const form_data = [
         {name:'Business Name',access:'businessName'},
         {name:'Contact Number',access:'contactNumber'},
@@ -41,6 +47,7 @@ const CompanyAddModal = (props) => {
                             type="text"
                             placeholder={'Enter '+value["name"]}
                             //defaultValue={props.company[value["access"]]}
+                            onChange={(event) => handleChange(event,value["access"])}
                         />
                         <Form.Control.Feedback type="invalid">
                             {'Please enter valid '+value["name"]}
