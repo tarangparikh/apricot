@@ -31,5 +31,6 @@ public class Company {
     private String bankName;
     private String accountNumber;
     private String ifscCode;
+    private Integer isSelected;
     @OneToOne private User user;
 }

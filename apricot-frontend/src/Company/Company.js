@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {Button, ButtonGroup, Card, Container, Table} from "react-bootstrap";
+import {Badge, Button, ButtonGroup, Card, Container, Table} from "react-bootstrap";
 import axios from 'axios';
 import Constants from "../Constant/Constants";
 import CompanyViewModal from "./CompanyViewModal";
@@ -15,11 +15,7 @@ class Company extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            user:{
-                id: 1,
-                email: 'tp0265@gmail.com',
-                password: 'password'
-            },
+            user: this.props.user,
             api_store : Constants(),
             isLoaded: false,
             company:[],
@@ -30,6 +26,7 @@ class Company extends Component{
     componentDidMount() {
         axios.get(this.state.api_store.company.viewCompany+this.state.user.id)
                 .then(value => {
+                    //alert(JSON.stringify(value.data))
                     this.setState({
                         isLoaded: true,
                         company: value.data,
@@ -38,20 +35,52 @@ class Company extends Component{
 
                 })
     }
-    //
+    selectHandler = (event,index) => {
+        new Promise((resolve, reject) => {
+            let current_company =  [...this.state.company].filter(value => value.id === index)[0]
+            resolve(current_company)
+        }).then(value => {
+            axios.post(this.state.api_store.company.postCurrentCompany,value)
+                .then(value => {
+                    let updated_company = value.data;
+                    let company_clone = [...this.state.company];
+                    for(let i = 0;i<company_clone.length;i++){
+                        if(company_clone[i].isSelected === 1){
+                            company_clone[i].isSelected = 0;
+                        }
+                    }
+                    company_clone = company_clone.map(obj => {
+                        return updated_company.id === obj.id ? updated_company : obj;
+                    });
+
+                    this.setState({
+                        company: company_clone
+                    })
+
+                    alert('Successfully changed the company.')
+                }).catch(reason => {
+                    alert('Unable to change the company.')
+            })
+        })
+    }
     deleteHandler = (event,index) => {
         axios.delete(this.state.api_store.company.deleteCompany+index)
             .then(r =>{
-                let company_clone = [...this.state.company].filter(v => v.id!==index)
-                this.setState({
-                    company: company_clone
-                })
+                axios.get(this.state.api_store.company.viewCompany+this.state.user.id)
+                    .then(value => {
+                        //alert(JSON.stringify(value.data))
+                        this.setState({
+                            company: value.data,
+                        })
+                    }).catch(reason => {
+                        alert('Please refresh the page.')
+                    })
             }).catch(reason => {
                 alert(JSON.stringify(reason))
             })
     }
     updateHandler = (company) => {
-        axios.post(this.state.api_store.company.postCompany+this.state.user.id,company)
+        axios.post(this.state.api_store.company.postCompany,company)
             .then(response => {
                 let updated_company = response.data;
                 let company_clone = [...this.state.company].map(obj => {
@@ -123,7 +152,7 @@ class Company extends Component{
                     <tr key={c.id}>
                         <td>{c.businessName}</td>
                         <td>{c.contactNumber}</td>
-                        <td>{c.email}</td>
+                        <td>{c.isSelected === 0 ? <Badge style={{cursor: "pointer"}} onClick={(event)=>this.selectHandler(event,c.id)} variant="secondary">Un-Selected</Badge> : <Badge variant="primary">Selected</Badge>}</td>
                         <td>
                             <ButtonGroup aria-label="Actions">
                                 <Button variant="secondary" onClick = {() => this.showCompanyViewModal(c.id)}>View</Button>
@@ -152,7 +181,7 @@ class Company extends Component{
         }
     }
     makeCompanyAddModal = () => {
-            return <CompanyAddModal user={this.state.user.id} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModal}/>
+            return <CompanyAddModal user={this.state.user} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModal}/>
     }
 
 

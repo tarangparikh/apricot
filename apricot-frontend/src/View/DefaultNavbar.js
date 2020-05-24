@@ -62,13 +62,13 @@ class DefaultNav extends Component{
                             </Nav.Item>
 
                             <NavDropdown title="Item" id="nav-item">
-                                <NavDropdown.Item eventKey="view.product">Product</NavDropdown.Item>
+                                <NavDropdown.Item href="/item/product" eventKey="view.product">Product</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.services">Services</NavDropdown.Item>
+                                <NavDropdown.Item href="/item/service" eventKey="view.services">Services</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.Units">Units</NavDropdown.Item>
+                                <NavDropdown.Item href="/item/unit" eventKey="view.Units">Units</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.Category">Category</NavDropdown.Item>
+                                <NavDropdown.Item href="/item/category" eventKey="view.Category">Category</NavDropdown.Item>
                                 <NavDropdown.Divider />
                             </NavDropdown>
 

@@ -1,6 +1,7 @@
 package com.apricot.core.model.category;
 
 import com.apricot.core.model.company.Company;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ import javax.persistence.*;
 
 */
 @Entity
-@Table
+@Data
 public class Category {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String categoryName;

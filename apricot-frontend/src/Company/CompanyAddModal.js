@@ -2,7 +2,9 @@ import React, {useState} from "react";
 import {Button, Form, Modal, Table} from "react-bootstrap";
 const CompanyAddModal = (props) => {
     const [validated, setValidated] = useState(false);
-    const [company,setCompany] = useState({});
+    const [company,setCompany] = useState({
+        user: props.user
+    });
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         event.preventDefault();
