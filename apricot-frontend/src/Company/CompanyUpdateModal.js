@@ -14,7 +14,8 @@ const CompanyUpdateModal = (props) => {
         state: props.company.state,
         bankName: props.company.bankName,
         accountNumber: props.company.accountNumber,
-        ifscCode: props.company.ifscCode
+        ifscCode: props.company.ifscCode,
+        user: props.company.user
     })
     const form_data = [
         {name:'Business Name',access:'businessName'},

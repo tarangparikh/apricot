@@ -12,7 +12,11 @@ class Company extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            userId: 1,
+            user: {
+                 id: 1,
+                 email: "tp0265@gmail.com",
+                 password: "password"
+            },
             api_store : Constants(),
             isLoaded: false,
             company:[],
@@ -22,7 +26,7 @@ class Company extends Component{
     //axios call
     componentDidMount() {
         //console.log('Constructor'+' Component did mount')
-        axios.get(this.state.api_store.company.viewCompany+this.state.userId)
+        axios.get(this.state.api_store.company.viewCompany+this.state.user.id)
             .then(value => {
                 this.setState({
                     isLoaded: true,
@@ -46,7 +50,7 @@ class Company extends Component{
             })
     }
     updateHandler = (company) => {
-        axios.post(this.state.api_store.company.postCompany+this.state.userId,company)
+        axios.post(this.state.api_store.company.postCompany+this.state.user.id,company)
             .then(response => {
                 let updated_company = response.data;
                 let company_clone = [...this.state.company].map(obj => {
@@ -55,19 +59,20 @@ class Company extends Component{
                 this.setState({
                     company: company_clone
                 })
-                alert('updated')
+                alert('added')
             }).catch(reason => {
                 alert(JSON.stringify(reason))
             })
     }
     addHandler = (company) => {
-        axios.post(this.state.api_store.company.postCompany+this.state.userId,company)
+        axios.post(this.state.api_store.company.postCompany+this.state.user.id,company)
             .then(response => {
                 let company_clone = [...this.state.company];
                 company_clone.push(response.data);
                 this.setState({
                     company: company_clone
                 })
+                alert('updated')
             }).catch(reason => {
                 alert(JSON.stringify(reason))
             })
@@ -146,7 +151,7 @@ class Company extends Component{
         }
     }
     makeCompanyAddModal = () => {
-            return <CompanyAddModal user={this.state.userId} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModalShow}/>
+            return <CompanyAddModal user={this.state.user.id} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModalShow}/>
     }
 
 
