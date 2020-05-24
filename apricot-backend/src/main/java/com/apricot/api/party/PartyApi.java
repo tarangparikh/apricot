@@ -42,7 +42,7 @@ public class PartyApi {
     }
 
     @DeleteMapping("/delete/{party_id}")
-    void deleteCompany(@PathVariable Long party_id) {
+    void deleteParty(@PathVariable Long party_id) {
         partyRepository.deleteById(party_id);
     }
 }

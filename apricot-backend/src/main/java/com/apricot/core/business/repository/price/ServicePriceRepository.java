@@ -10,8 +10,12 @@ package com.apricot.core.business.repository.price;
     
 */
 
+import com.apricot.core.model.price.ProductPrice;
 import com.apricot.core.model.price.ServicePrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface ServicePriceRepository extends JpaRepository<ServicePrice,Long> {
+    List<ServicePrice> findAllByGst_Id(Long id);
 }
