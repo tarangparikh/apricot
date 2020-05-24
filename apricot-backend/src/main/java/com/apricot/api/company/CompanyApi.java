@@ -39,4 +39,8 @@ public class CompanyApi {
     public Company addCompany(@RequestBody Company company){
         return companyRepository.save(company);
     }
+    @DeleteMapping("/delete/{company_id}")
+    void deleteEmployee(@PathVariable Long company_id) {
+        companyRepository.deleteById(company_id);
+    }
 }
