@@ -15,6 +15,7 @@ const CompanyUpdateModal = (props) => {
         bankName: props.company.bankName,
         accountNumber: props.company.accountNumber,
         ifscCode: props.company.ifscCode,
+        isSelected: props.company.isSelected,
         user: props.company.user
     })
 

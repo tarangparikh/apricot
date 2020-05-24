@@ -206,7 +206,7 @@ class Company extends Component{
                                         <tr>
                                             <th>Business Name</th>
                                             <th>Contact Number</th>
-                                            <th>Email</th>
+                                            <th>Selected</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>

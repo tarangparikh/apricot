@@ -3,7 +3,8 @@ import {Button, Form, Modal, Table} from "react-bootstrap";
 const CompanyAddModal = (props) => {
     const [validated, setValidated] = useState(false);
     const [company,setCompany] = useState({
-        user: props.user
+        user: props.user,
+        isSelected: 0
     });
     const handleSubmit = (event) => {
         const form = event.currentTarget;

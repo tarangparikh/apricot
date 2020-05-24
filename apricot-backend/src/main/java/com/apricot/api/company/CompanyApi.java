@@ -54,7 +54,11 @@ public class CompanyApi {
         if(!exists) {
             company.setIsSelected(1);
         }else{
-            company.setIsSelected(0);
+            if (company.getId() != null) {
+                Company current_selected  = companyRepository.findByUser_IdAndIsSelected(company.getUser().getId(),1);
+                if(!current_selected.getId().equals(company.getId()))
+                    company.setIsSelected(0);
+            }
         }
         return companyRepository.save(company);
     }
