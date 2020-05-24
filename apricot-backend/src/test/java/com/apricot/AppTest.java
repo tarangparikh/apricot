@@ -30,6 +30,5 @@ public class AppTest
     @Test
     public void contexLoads() throws Exception {
 //        Assert.assertNotNull(userApi);
-
     }
 }

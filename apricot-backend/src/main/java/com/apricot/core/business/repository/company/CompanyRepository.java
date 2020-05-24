@@ -13,6 +13,8 @@ package com.apricot.core.business.repository.company;
 import com.apricot.core.model.company.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CompanyRepository extends JpaRepository<Company,Long> {
+import java.util.List;
 
+public interface CompanyRepository extends JpaRepository<Company,Long> {
+    List<Company> findByUser_Id(Integer id);
 }
