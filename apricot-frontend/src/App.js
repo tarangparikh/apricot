@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './App.css';
 import Login from "./Login/Login";
 import {BrowserRouter, Route,Switch} from 'react-router-dom';
-import Constants from "./Constant/Constants";
 import DashBoard from "./Dashboard/DasbBoard";
 import DefaultNav from "./View/DefaultNavbar";
 import Company from "./Company/Company";
@@ -11,9 +9,9 @@ import Company from "./Company/Company";
 
 
 class App  extends Component{
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     componentDidMount() {
 

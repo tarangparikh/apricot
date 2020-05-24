@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {Badge, Button, ButtonGroup, Card, Container, Dropdown, Jumbotron, Row, Table} from "react-bootstrap";
+import {Button, ButtonGroup, Card, Container, Table} from "react-bootstrap";
 import axios from 'axios';
 import Constants from "../Constant/Constants";
 import CompanyViewModal from "./CompanyViewModal";
