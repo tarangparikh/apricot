@@ -9,6 +9,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=apricot
+    volumes:
+      - db-data:/var/lib/mysql
   web-service:
     build:
       context: ./
