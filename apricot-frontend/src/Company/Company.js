@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import {Badge, Button, ButtonGroup, Card, Container, Table} from "react-bootstrap";
 import axios from 'axios';
+import Cookies from 'js-cookie'
 import Constants from "../Constant/Constants";
 import CompanyViewModal from "./CompanyViewModal";
 import CompanyUpdateModal from "./CompanyUpdateModal";
@@ -18,6 +19,7 @@ class Company extends Component{
             user: this.props.user,
             api_store : Constants(),
             isLoaded: false,
+            checkedCompany: undefined,
             company:[],
             currentCompany: undefined
         }
@@ -26,60 +28,50 @@ class Company extends Component{
     componentDidMount() {
         axios.get(this.state.api_store.company.viewCompany+this.state.user.id)
                 .then(value => {
-                    //alert(JSON.stringify(value.data))
                     this.setState({
                         isLoaded: true,
                         company: value.data,
                     })
+                    if(Cookies.get('apricot_company') === undefined){
+                        if(value.data.length > 0){
+                            Cookies.set('apricot_company',JSON.stringify(value.data[0]))
+                            this.setState({
+                                checkedCompany: value.data[0].id
+                            })
+                        }
+                    }else{
+                        const cookie_company = JSON.parse(Cookies.get('apricot_company'))
+                        this.setState({
+                            checkedCompany: cookie_company.id
+                        })
+                    }
                 }).catch(reason => {
 
                 })
     }
     selectHandler = (event,index) => {
-        new Promise((resolve, reject) => {
-            let current_company =  [...this.state.company].filter(value => value.id === index)[0]
-            resolve(current_company)
-        }).then(value => {
-            axios.post(this.state.api_store.company.postCurrentCompany,value)
-                .then(value => {
-                    let updated_company = value.data;
-                    let company_clone = [...this.state.company];
-                    for(let i = 0;i<company_clone.length;i++){
-                        if(company_clone[i].isSelected === 1){
-                            company_clone[i].isSelected = 0;
-                        }
-                    }
-                    company_clone = company_clone.map(obj => {
-                        return updated_company.id === obj.id ? updated_company : obj;
-                    });
-
-                    this.setState({
-                        company: company_clone
-                    })
-
-                    alert('Successfully changed the company.')
-                }).catch(reason => {
-                    alert('Unable to change the company.')
-            })
+        Cookies.remove('apricot_company');
+        let company_clone = [...this.state.company].filter(value => value.id === index)[0];
+        Cookies.set('apricot_company',JSON.stringify(company_clone));
+        this.setState({
+            checkedCompany: index
         })
     }
     deleteHandler = (event,index) => {
         axios.delete(this.state.api_store.company.deleteCompany+index)
             .then(r =>{
-                axios.get(this.state.api_store.company.viewCompany+this.state.user.id)
-                    .then(value => {
-                        //alert(JSON.stringify(value.data))
-                        this.setState({
-                            company: value.data,
-                        })
-                    }).catch(reason => {
-                        alert('Please refresh the page.')
-                    })
+                Cookies.set('apricot_company','',{expires : -1})
+                let company_clone = [...this.state.company].filter(value => value.id !== index)
+                this.setState({
+                    company: company_clone,
+                    companyChecked: undefined
+                })
             }).catch(reason => {
                 alert(JSON.stringify(reason))
             })
     }
     updateHandler = (company) => {
+        alert(JSON.stringify(company))
         axios.post(this.state.api_store.company.postCompany,company)
             .then(response => {
                 let updated_company = response.data;
@@ -102,7 +94,7 @@ class Company extends Component{
                 this.setState({
                     company: company_clone
                 })
-                alert('updated')
+                alert('Company Added')
             }).catch(reason => {
                 alert(JSON.stringify(reason))
             })
@@ -152,7 +144,12 @@ class Company extends Component{
                     <tr key={c.id}>
                         <td>{c.businessName}</td>
                         <td>{c.contactNumber}</td>
-                        <td>{c.isSelected === 0 ? <Badge style={{cursor: "pointer"}} onClick={(event)=>this.selectHandler(event,c.id)} variant="secondary">Un-Selected</Badge> : <Badge variant="primary">Selected</Badge>}</td>
+                        <td>{c.email}</td>
+                        <td>{
+                            this.state.checkedCompany === c.id? <input type="radio" checked name="optradio" onChange={(event)=>this.selectHandler(event,c.id)}/>
+                            : <input type="radio" name="optradio" onChange={(event)=>this.selectHandler(event,c.id)}/>
+                        }
+                        </td>
                         <td>
                             <ButtonGroup aria-label="Actions">
                                 <Button variant="secondary" onClick = {() => this.showCompanyViewModal(c.id)}>View</Button>
@@ -177,11 +174,19 @@ class Company extends Component{
         if(this.state.currentCompany === undefined){
             return <div/>
         }else{
-            return <CompanyUpdateModal show={this.state.companyUpdateModalShow} company={this.state.currentCompany} updateHandler={this.updateHandler} closeHandler={this.closeCompanyUpdateModal} />
+            return <CompanyUpdateModal
+                show={this.state.companyUpdateModalShow}
+                company={this.state.currentCompany}
+                updateHandler={this.updateHandler}
+                closeHandler={this.closeCompanyUpdateModal} />
         }
     }
     makeCompanyAddModal = () => {
-            return <CompanyAddModal user={this.state.user} show = {this.state.companyAddModalShow} addHandler={this.addHandler} closeHandler={this.closeCompanyAddModal}/>
+            return <CompanyAddModal
+                user={this.state.user}
+                show = {this.state.companyAddModalShow}
+                addHandler={this.addHandler}
+                closeHandler={this.closeCompanyAddModal}/>
     }
 
 
@@ -206,6 +211,7 @@ class Company extends Component{
                                         <tr>
                                             <th>Business Name</th>
                                             <th>Contact Number</th>
+                                            <th>Email</th>
                                             <th>Selected</th>
                                             <th>Action</th>
                                         </tr>

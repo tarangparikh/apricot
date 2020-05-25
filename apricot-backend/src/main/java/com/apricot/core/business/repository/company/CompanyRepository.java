@@ -18,6 +18,6 @@ import java.util.List;
 public interface CompanyRepository extends JpaRepository<Company,Long> {
     List<Company> findByUser_Id(Long id);
     boolean existsByUser_Id(Long id);
-    Company findByUser_IdAndIsSelected(Long id,Integer isSelected);
+
 
 }

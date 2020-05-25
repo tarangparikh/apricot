@@ -1,18 +1,17 @@
-import React, {useState} from "react";
+import React,{useState} from "react";
 import {Button, Form, Modal, Table} from "react-bootstrap";
-const CompanyAddModal = (props) => {
+const CategoryAddModal = (props) => {
     const [validated, setValidated] = useState(false);
-    const [company,setCompany] = useState({
-        user: props.user,
-    });
+    const[category,setCategory] = useState({
+        company: props.company
+    })
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
         }else{
-            //alert('submiting')
-            props.addHandler(company)
+            props.addHandler(category)
         }
         setValidated(true)
 
@@ -20,24 +19,13 @@ const CompanyAddModal = (props) => {
     const handleChange = (event,attribute) => {
         let obj = {}
         obj[attribute] = event.target.value;
-        setCompany((prevState => {
+        setCategory((prevState => {
             return {...prevState,...obj}
         }))
     }
-    const form_data = [
-        {name:'Business Name',access:'businessName',pattern:'(.)*'},
-        {name:'Contact Number',access:'contactNumber',pattern:'^((\\+){0,1}91(\\s){0,1}(\\-){0,1}(\\s){0,1}){0,1}98(\\s){0,1}(\\-){0,1}(\\s){0,1}[1-9]{1}[0-9]{7}$'},
-        {name:'GST-In Number',access:'gstInNumber',pattern:'(.)*'},
-        {name:'Email',access:'email',pattern:'^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'},
-        {name:'Address',access:'address',pattern:'(.)*'},
-        {name:'State',access:'state',pattern:'(.)*'},
-        {name:'Bank Name',access:'bankName',pattern:'(.)*'},
-        {name:'Account Number',access:'accountNumber',pattern:'(.)*'},
-        {name:'IFSC Code',access:'ifscCode',pattern:'(.)*'}
-    ]
 
-    const make_from_data = () => {
-        const sub_data = form_data.map(value => {
+    const make_form_data = () => {
+        const sub_data = props.form_data.map(value => {
             return(
                 <tr>
                     <td>
@@ -49,7 +37,6 @@ const CompanyAddModal = (props) => {
                             type="text"
                             placeholder={'Enter '+value["name"]}
                             pattern={value["pattern"]}
-                            //defaultValue={props.company[value["access"]]}
                             onChange={(event) => handleChange(event,value["access"])}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -68,7 +55,7 @@ const CompanyAddModal = (props) => {
     return(
         <Modal show={props.show} onHide={props.closeHandler}>
             <Modal.Header closeButton>
-                <Modal.Title>Company Detailed View</Modal.Title>
+                <Modal.Title>Add Category</Modal.Title>
             </Modal.Header>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Modal.Body>
@@ -80,7 +67,7 @@ const CompanyAddModal = (props) => {
                                 <th></th>
                             </tr>
                             </thead>
-                            {make_from_data()}
+                            {make_form_data()}
                         </Table>
                     </div>
                 </Modal.Body>
@@ -96,5 +83,4 @@ const CompanyAddModal = (props) => {
         </Modal>
     )
 }
-
-export default CompanyAddModal
+export default CategoryAddModal

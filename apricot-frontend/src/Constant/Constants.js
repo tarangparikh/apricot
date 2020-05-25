@@ -3,6 +3,7 @@ const Constants = () => {
     const api_base =  "http://localhost:8080/api/";
     const api_company = "company/";
     const api_user = "user/";
+    const api_category = "category/"
     return {
         company: {
             //{/user_id}
@@ -14,6 +15,11 @@ const Constants = () => {
         },
         user:{
             authentication: api_base+api_user+ 'auth/'
+        },
+        category:{
+            //{/company_id}
+            viewCategory: api_base + api_category,
+            postCategory: api_base + api_category + 'post/'
         }
     };
 }

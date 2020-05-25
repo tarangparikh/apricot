@@ -14,7 +14,8 @@ class Home extends Component{
         super(props);
         this.state = {
             isAuthenticating: true,
-            isValidUser: false
+            isValidUser: false,
+            isValidCompany: false
         }
     }
     componentDidMount() {
@@ -24,11 +25,22 @@ class Home extends Component{
                 isValidUser: false
             })
         }else{
-            this.setState({
-                isAuthenticating: false,
-                isValidUser: true,
-                user: JSON.parse(Cookies.get('apricot_user'))
-            })
+            if(Cookies.get('apricot_company')===undefined){
+                this.setState({
+                    isAuthenticating: false,
+                    isValidUser: true,
+                    isValidCompany: false,
+                    user: JSON.parse(Cookies.get('apricot_user'))
+                })
+            }else{
+                this.setState({
+                    isAuthenticating: false,
+                    isValidUser: true,
+                    isValidCompany: true,
+                    user: JSON.parse(Cookies.get('apricot_user')),
+                    company: JSON.parse(Cookies.get('apricot_company'))
+                })
+            }
         }
     }
     render(){
@@ -36,15 +48,26 @@ class Home extends Component{
         const dashBoard_component = () => <DashBoard/>
         const item_product_component = () => <Product/>
         const item_service_component = () => <Service/>
-        const item_category_component = () => <Category/>
+        const item_category_component = () => <Category company={this.state.company}/>
         const item_unit_component = () => <Unit/>
-
 
         if(this.state.isAuthenticating){
             return <div>Loading...</div>
         }else if(!this.state.isValidUser){
             return <Redirect to='/login'/>
-        }else{
+        }else if(!this.state.isValidCompany){
+            return (
+                <div>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route path = "/" component={company_component}/>
+                            <Route exact path="/company" component={company_component} />
+                        </Switch>
+                    </BrowserRouter>
+                </div>
+            )
+        }
+        else {
             return (
                 <div>
                     <DefaultNav/>

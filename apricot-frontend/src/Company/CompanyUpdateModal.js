@@ -36,6 +36,7 @@ const CompanyUpdateModal = (props) => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         }else{
+            alert('MODAL : '+JSON.stringify(company))
             props.updateHandler(company)
             //alert('submiting')
         }
