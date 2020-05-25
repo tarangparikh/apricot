@@ -19,6 +19,7 @@ import javax.persistence.*;
 @Data
 public class Party {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+    private String partyName;
     private String phoneNumber;
     private String email;
     private String billingAddress;

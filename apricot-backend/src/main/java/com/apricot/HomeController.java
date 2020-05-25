@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = {"/", "/company/**", "/dashboard/**","/login/**","/item/**"})
+    @RequestMapping(value = {"/", "/company/**", "/dashboard/**","/login/**","/item/**", "/party/**"})
     public String index() {
         return "/index.html";
     }

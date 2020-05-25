@@ -50,7 +50,7 @@ class DefaultNav extends Component{
                             </Nav.Item>
 
                             <Nav.Item>
-                                <Nav.Link eventKey="view.party" href="#/home">
+                                <Nav.Link eventKey="view.party" href="/party">
                                     Party
                                 </Nav.Link>
                             </Nav.Item>

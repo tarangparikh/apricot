@@ -3,8 +3,9 @@ const Constants = () => {
     const api_base =  "http://localhost:8080/api/";
     const api_company = "company/";
     const api_user = "user/";
-    const api_category = "category/"
-    const api_product = "product/"
+    const api_category = "category/";
+    const api_product = "product/";
+    const api_party = "party/";
     return {
         company: {
             //{user_id}
@@ -29,6 +30,12 @@ const Constants = () => {
             postProduct: api_base + api_product + 'post/',
             //{product_id}
             deleteProduct: api_base + api_product + 'delete/'
+        },
+        party:{
+            //{company_id}
+            viewParty: api_base + api_party,
+            postParty: api_base + api_party + 'post/',
+            deleteParty: api_base + api_party + 'delete/'
         }
     };
 }

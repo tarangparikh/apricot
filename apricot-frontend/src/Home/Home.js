@@ -3,13 +3,15 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import DefaultNav from "../View/DefaultNavbar";
 import Company from "../Company/Company";
 import DashBoard from "../Dashboard/DasbBoard";
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import Redirect from "react-router-dom/es/Redirect";
 import Product from "../Items/Product/Product";
 import Service from "../Items/Service/Service";
 import Category from "../Items/Category/Category";
 import Unit from "../Items/Unit/Unit";
-class Home extends Component{
+import Party from "../party/Party";
+
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +26,8 @@ class Home extends Component{
                 isAuthenticating: false,
                 isValidUser: false
             })
-        }else{
+        }
+        else{
             if(Cookies.get('apricot_company')===undefined){
                 this.setState({
                     isAuthenticating: false,
@@ -43,13 +46,16 @@ class Home extends Component{
             }
         }
     }
-    render(){
+    render()
+    {
         const company_component = () => <Company user={this.state.user}/>
         const dashBoard_component = () => <DashBoard/>
         const item_product_component = () => <Product company={this.state.company}/>
         const item_service_component = () => <Service/>
         const item_category_component = () => <Category company={this.state.company}/>
         const item_unit_component = () => <Unit/>
+        const party_component = () => <Party company={this.state.company}/>
+
 
         if(this.state.isAuthenticating){
             return <div>Loading...</div>
@@ -81,6 +87,7 @@ class Home extends Component{
                             <Route exact path="/item/service" component={item_service_component}/>
                             <Route exact path="/item/unit" component={item_unit_component}/>
                             <Route exact path="/item/category" component={item_category_component}/>
+                            <Route exact path="/party" component={party_component}/>
                         </Switch>
                     </BrowserRouter>
                 </div>
@@ -88,4 +95,4 @@ class Home extends Component{
         }
     }
 }
-export default Home
+export default Home;
