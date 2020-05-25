@@ -13,5 +13,8 @@ package com.apricot.core.business.repository.Item;
 import com.apricot.core.model.item.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface ProductRepository extends JpaRepository<Product,Long> {
+    List<Product> findByCompany_Id(Long id);
 }

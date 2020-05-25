@@ -14,4 +14,5 @@ import com.apricot.core.model.gst.Gst;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GstRepository extends JpaRepository<Gst,Long> {
+
 }

@@ -22,7 +22,9 @@ public class App
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("POST","DELETE","GET");
+                registry.addMapping("/**")
+                        .allowedMethods("POST","DELETE","GET");
+
             }
         };
     }

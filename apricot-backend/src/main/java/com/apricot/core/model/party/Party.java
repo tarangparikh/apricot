@@ -11,11 +11,12 @@ package com.apricot.core.model.party;
 */
 
 import com.apricot.core.model.company.Company;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Table
+@Data
 public class Party {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String phoneNumber;
@@ -23,7 +24,7 @@ public class Party {
     private String billingAddress;
     private String shippingAddress;
     private Long balance;
-    @Enumerated(EnumType.STRING) private PartyType partyType;
+    //@Enumerated(EnumType.STRING) private PartyType partyType;
     private String gstInNumber;
     @OneToOne private Company company;
 }

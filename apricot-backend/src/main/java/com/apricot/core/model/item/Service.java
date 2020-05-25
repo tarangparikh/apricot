@@ -12,10 +12,15 @@ package com.apricot.core.model.item;
 
 
 import com.apricot.core.model.price.ServicePrice;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Service extends Item {
     @OneToOne private ServicePrice servicePrice;
 

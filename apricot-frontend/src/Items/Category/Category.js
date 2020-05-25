@@ -2,7 +2,6 @@ import React,{Component} from "react";
 import {Button, ButtonGroup, Card, Container, Table} from "react-bootstrap";
 import axios from 'axios'
 import Constants from "../../Constant/Constants";
-import CompanyAddModal from "../../Company/CompanyAddModal";
 import CategoryAddModal from "./CategoryAddModal";
 import CategoryUpdateModal from "./CategoryUpdateModal";
 class Category extends Component{
@@ -30,6 +29,17 @@ class Category extends Component{
             }).catch(reason => {
 
         })
+    }
+    deleteHandler = (event,index) => {
+        axios.delete(this.state.api_store.category.deleteCategory+index)
+            .then(r => {
+                let clone_category = [...this.state.category].filter(value => value.id !== index)
+                this.setState({
+                    category: clone_category
+                })
+            }).catch(reason => {
+                alert(JSON.stringify(reason))
+            })
     }
     updateHandler = (category) => {
         //alert(JSON.stringify(category))
@@ -103,7 +113,10 @@ class Category extends Component{
                                     onClick = {(event) => this.showCategoryUpdateModal(event,category.id)}>
                                     Update
                                 </Button>
-                                <Button variant="danger">Delete</Button>
+                                <Button
+                                    variant="danger"
+                                    onClick = {(event) => this.deleteHandler(event,category.id)}
+                                >Delete</Button>
                             </ButtonGroup>
                         </td>
                     </tr>

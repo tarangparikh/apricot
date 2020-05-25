@@ -1,14 +1,5 @@
 package com.apricot.core.model.item;
-
-import com.apricot.core.model.item.Item;
-import com.apricot.core.model.price.ProductPrice;
-import com.apricot.core.model.stock.Stock;
-
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-/*
+/* 
     Apricot Management Suite
     Copyright (C) 2020 Tarang Parikh
     
@@ -19,9 +10,23 @@ import javax.persistence.Table;
     
 */
 
+import com.apricot.core.model.price.ProductPrice;
+import com.apricot.core.model.stock.Stock;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
+
 @Entity
-@Table
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Product extends Item {
-    @OneToOne private ProductPrice productPrice;
-    @OneToOne private Stock stock;
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    private ProductPrice productPrice;
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    private Stock stock;
 }

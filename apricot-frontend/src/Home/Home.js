@@ -46,7 +46,7 @@ class Home extends Component{
     render(){
         const company_component = () => <Company user={this.state.user}/>
         const dashBoard_component = () => <DashBoard/>
-        const item_product_component = () => <Product/>
+        const item_product_component = () => <Product company={this.state.company}/>
         const item_service_component = () => <Service/>
         const item_category_component = () => <Category company={this.state.company}/>
         const item_unit_component = () => <Unit/>

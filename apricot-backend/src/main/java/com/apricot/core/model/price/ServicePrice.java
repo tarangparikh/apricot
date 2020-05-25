@@ -19,5 +19,5 @@ public class ServicePrice {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private Long salePrice;
     private Integer salesTaxIncluded;
-    @OneToOne private Gst gst;
+    @OneToOne(cascade = CascadeType.ALL) private Gst gst;
 }
