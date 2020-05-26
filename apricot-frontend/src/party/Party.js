@@ -41,6 +41,20 @@ class Party extends Component {
         })
     }
 
+    deleteHandler = (event,index) => {
+        axios.delete(this.state.api_store.party.deleteParty+index)
+            .then(r =>{
+                // Cookies.set('apricot_party','',{expires : -1})
+                let party_clone = [...this.state.party].filter(value => value.id !== index)
+                this.setState({
+                    party: party_clone
+                    // partyChecked: undefined
+                })
+            }).catch(reason => {
+            alert(JSON.stringify(reason))
+        })
+    }
+
     updateHandler = (party) => {
         //alert(JSON.stringify(category))
         axios.post(this.state.api_store.party.postParty,party)
@@ -115,11 +129,17 @@ class Party extends Component {
                         <td>
                             <ButtonGroup aria-label="Actions">
                                 <Button
+                                    variant="primary">
+                                    View
+                                </Button>
+                                <Button
                                     variant="secondary"
                                     onClick = {(event) => this.showPartyUpdateModal(event,party.id)}>
                                     Update
                                 </Button>
-                                <Button variant="danger">Delete</Button>
+                                <Button variant="danger"
+                                        onClick = {(event) => this.deleteHandler(event,party.id)}>
+                                    Delete</Button>
                             </ButtonGroup>
                         </td>
                     </tr>
