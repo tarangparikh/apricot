@@ -2,10 +2,10 @@ import React,{Component} from "react";
 import {Badge, Button, ButtonGroup, Card, Container, Table} from "react-bootstrap";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import PartyViewModal from "./PartyViewModal";
 import Constants from "../Constant/Constants";
 import PartyAddModal from "./PartyAddModal";
 import PartyUpdateModal from "./PartyUpdateModal";
+import PartyViewModal from "./PartyViewModal";
 
 class Party extends Component {
 
@@ -88,30 +88,43 @@ class Party extends Component {
         })
     }
 
-    showPartyAddModal = () => {
+    showPartyViewModal = (index) => {
+        let party = [...this.state.party].filter(value => value.id===index)
         this.setState({
-            partyAddModalShow: true
+            partyViewModalShow: true,
+            currentParty: party[0]
         })
     }
 
     showPartyUpdateModal = (event,index) => {
-        let party = [...this.state.party]
-            .filter(value => value.id === index)
+        let party = [...this.state.party].filter(value => value.id === index)
         this.setState({
             partyUpdateModalShow: true,
             currentParty: party[0]
         })
     }
 
-    closePartyAddModal = () => {
+    showPartyAddModal = () => {
         this.setState({
-            partyAddModalShow: false
+            partyAddModalShow: true
+        })
+    }
+
+    closePartyViewModal= () => {
+        this.setState({
+            partyViewModalShow: false
         })
     }
 
     closePartyUpdateModal = () => {
         this.setState({
             partyUpdateModalShow: false
+        })
+    }
+
+    closePartyAddModal = () => {
+        this.setState({
+            partyAddModalShow: false
         })
     }
 
@@ -126,10 +139,13 @@ class Party extends Component {
                         <td>{party.partyName}</td>
                         <td>{party.phoneNumber}</td>
                         <td>{party.gstInNumber}</td>
+                        <td style={{color: Math.sign(party.balance) === -1 ? "red" : "green"}}>
+                            {party.balance} </td>
                         <td>
                             <ButtonGroup aria-label="Actions">
                                 <Button
-                                    variant="primary">
+                                    variant="primary"
+                                    onClick = {(event) => this.showPartyViewModal(event,party.id)}>
                                     View
                                 </Button>
                                 <Button
@@ -149,14 +165,17 @@ class Party extends Component {
         return partyList;
     }
 
-    makePartyAddModal = () =>{
-        return <PartyAddModal
-            form_data = {this.formData}
-            show = {this.state.partyAddModalShow}
-            company={this.state.company}
-            addHandler={this.addHandler}
-            closeHandler={this.closePartyAddModal}/>
+    makePartyViewModal = () => {
+        if(this.state.currentParty === undefined){
+            return <div/>
+        }else{
+            return <PartyViewModal
+                show={this.state.partyViewModalShow}
+                party={this.state.currentParty}
+                closeHandler={this.closePartyViewModal} />
+        }
     }
+
     makePartyUpdateModal = () => {
         if(this.state.currentParty === undefined) {
             return <div/>
@@ -172,11 +191,20 @@ class Party extends Component {
         }
     }
 
+    makePartyAddModal = () =>{
+        return <PartyAddModal
+            form_data = {this.formData}
+            show = {this.state.partyAddModalShow}
+            company={this.state.company}
+            addHandler={this.addHandler}
+            closeHandler={this.closePartyAddModal}/>
+    }
+
     render() {
         let partyList = this.makePartyList();
-        // let partyViewModal = this.makePartyViewModal();
-        let partyAddModal = this.makePartyAddModal()
+        let partyViewModal = this.makePartyViewModal();
         let partyUpdateModal = this.makePartyUpdateModal();
+        let partyAddModal = this.makePartyAddModal()
 
         return (
             <div>
@@ -187,7 +215,7 @@ class Party extends Component {
                                 Party Details
                                 <Button onClick={this.showPartyAddModal}
                                         style={{float : "right"}}>
-                                        Add</Button>
+                                        Add Party</Button>
                             </h3>
                         </Card.Header>
                         <Card.Body>
@@ -197,6 +225,7 @@ class Party extends Component {
                                     <th>Party Name</th>
                                     <th>Contact Number</th>
                                     <th>GST Number</th>
+                                    <th>Balance</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -207,8 +236,9 @@ class Party extends Component {
 
                         </Card.Body>
                     </Card>
-                    {partyAddModal}
+                    {partyViewModal}
                     {partyUpdateModal}
+                    {partyAddModal}
                 </Container>
             </div>
         )

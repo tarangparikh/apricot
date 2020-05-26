@@ -60,7 +60,7 @@ const PartyUpdateModal = (props) => {
 
         <Modal show={props.show} onHide={props.closeHandler}>
             <Modal.Header closeButton>
-                <Modal.Title>Party Detailed View</Modal.Title>
+                <Modal.Title>Update Party Details</Modal.Title>
             </Modal.Header>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Modal.Body>
