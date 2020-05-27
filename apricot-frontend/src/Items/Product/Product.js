@@ -5,11 +5,13 @@ import Constants from "../../Constant/Constants";
 import CategoryUpdateModal from "../Category/CategoryUpdateModal";
 import ProductViewModal from "./ProductViewModal";
 import ProductUpdateModal from "./ProductUpdateModal";
+import ProductAddModal from "./ProductAddModal";
 class Product extends Component{
     constructor(props) {
         super(props);
         this.state={
             product: [],
+            category:[],
             company : this.props.company,
             isLoaded : false,
             currentProduct: undefined,
@@ -25,14 +27,14 @@ class Product extends Component{
                 {name:"Category Name",access:["category","categoryName"],pattern:"(.)*",parse:(v) => v.toString()}
             ],
             productPrice:[
-                {name:"Sale Price",access:["productPrice","salePrice"],pattern:"(.)*",parse:(v) => JSON.parseInt(v)},
-                {name:"Purchase Price",access:["productPrice","purchasePrice"],pattern:"(.)*",parse:(v) => JSON.parseInt(v)},
-                {name:"Additional Cess",access:["productPrice","additionalCess"],pattern:"(.)*",parse:(v) => JSON.parseInt(v)},
-                {name:"Sales Tax Included",access:["productPrice","saleTaxIncluded"],pattern:"[yes|no|Y|N|y|n]",parse:(v) => { if(v==='yes') {return 1;} else {return 0}},reveal: (v) => {if(v===1) {return 'yes';} else {return 'no'}}},
-                {name:"Purchase Tax Included",access:["productPrice","purchaseTaxIncluded"],pattern:"[yes|no|Y|N|y|n]",parse:(v) => { if(v==='yes'){return 1;} else {return 0}},reveal: (v) => {if(v===1) {return 'yes';} else {return 'no'}}},
+                {name:"Sale Price",access:["productPrice","salePrice"],pattern:"(.)*",parse:(v) => parseInt(v)},
+                {name:"Purchase Price",access:["productPrice","purchasePrice"],pattern:"(.)*",parse:(v) => parseInt(v)},
+                {name:"Additional Cess",access:["productPrice","additionalCess"],pattern:"(.)*",parse:(v) => parseInt(v)},
+                {name:"Sales Tax Included",access:["productPrice","saleTaxIncluded"],pattern:"[0-1]",parse:(v) => parseInt(v)},
+                {name:"Purchase Tax Included",access:["productPrice","purchaseTaxIncluded"],pattern:"[0-1]",parse:(v) => parseInt(v)},
                 {name:"Gst Type",access: ["productPrice","gst","gstType"],pattern: "(.)*",parse:(v) => v.toString()},
-                {name:"Gst Type",access: ["productPrice","gst","gstRate"],pattern: "(.)*",parse:(v) => JSON.parseInt(v)},
-            ]
+                {name:"Gst Rate",access: ["productPrice","gst","gstRate"],pattern: "(.)*",parse:(v) => parseInt(v)},
+            ],
         }
     }
 
@@ -40,13 +42,56 @@ class Product extends Component{
         //alert(JSON.stringify(this.state.company))
         axios.get(this.state.api_store.product.viewProduct+this.state.company.id)
             .then(value => {
-                this.setState({
-                    isLoaded: true,
-                    product: value.data
+                axios.get(this.state.api_store.category.viewCategory+this.state.company.id).then(value1 => {
+                    this.setState({
+                        isLoaded: true,
+                        product: value.data,
+                        category: value1.data
+                    })
                 })
             }).catch(reason => {
                 alert('Unable to get products : '+JSON.stringify(reason));
             })
+    }
+    deleteHandler = (event,index) => {
+        axios.delete(this.state.api_store.product.deleteProduct+index)
+            .then(r => {
+                let clone_product = [...this.state.product].filter(value => value.id !== index)
+                this.setState({
+                    product: clone_product
+                })
+            }).catch(reason => {
+            alert(JSON.stringify(reason))
+        })
+    }
+    addHandler = (product) => {
+        axios.post(this.state.api_store.product.postProduct,product)
+            .then(value => {
+                let added_product = value.data;
+                let clone_product = [...this.state.product];
+                clone_product.push(added_product)
+                this.setState({
+                    product: clone_product
+                })
+                alert('product added')
+            }).catch(reason => {
+            alert(JSON.stringify(reason))
+        })
+    }
+    updateHandler = (product) => {
+        axios.post(this.state.api_store.product.postProduct,product)
+            .then(value => {
+                let updated_product = value.data;
+                let clone_product = [...this.state.product].map(obj => {
+                    return updated_product.id === obj.id ? updated_product : obj;
+                });
+                this.setState({
+                    product: clone_product
+                })
+                alert('product updated')
+            }).catch(reason => {
+                alert(JSON.stringify(reason))
+        })
     }
     showViewModal = (event,index) => {
         let product = [...this.state.product].filter(value => value.id === index);
@@ -105,7 +150,7 @@ class Product extends Component{
                                 >Update</Button>
                                 <Button
                                     variant="danger"
-                                    //onClick = {(event) => this.deleteHandler(event,c.id)}
+                                    onClick = {(event) => this.deleteHandler(event,product.id)}
                                 >Delete</Button>
                             </ButtonGroup>
                         </td>
@@ -147,18 +192,33 @@ class Product extends Component{
         if(this.state.currentProduct === undefined){
             return <div/>
         }else{
+            //alert(JSON.stringify(this.state.category))
             return <ProductUpdateModal
                 show = {this.state.updateModalShow}
                 product = {this.state.currentProduct}
+                category = {this.state.category}
                 formData = {this.formData}
+                updateHandler = {this.updateHandler}
                 closeHandler = {this.closeUpdateModal}
             />
         }
+    }
+    makeAddModal = () => {
+        if(this.state.isLoaded === false) return <div/>
+        return <ProductAddModal
+            show = {this.state.addModalShow}
+            company = {this.state.company}
+            category = {this.state.category}
+            formData = {this.formData}
+            addHandler = {this.addHandler}
+            closeHandler = {this.closeAddModal}
+        />
     }
     render() {
         let productTable = this.make_product_table();
         let viewModal = this.makeViewModal();
         let updateModal = this.makeUpdateModal();
+        let addModal = this.makeAddModal();
         return(
             <div>
                 <Container style={{ marginTop: "10px",}}>
@@ -166,7 +226,7 @@ class Product extends Component{
                         <Card.Header>
                             <h3>
                                 Product Details
-                                <Button style={{float : "right"}}>Add</Button>
+                                <Button onClick={this.showAddModal} style={{float : "right"}}>Add</Button>
                             </h3>
                         </Card.Header>
                         <Card.Body>
@@ -176,6 +236,7 @@ class Product extends Component{
                 </Container>
                 {viewModal}
                 {updateModal}
+                {addModal}
             </div>
         )
     }

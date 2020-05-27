@@ -7,6 +7,7 @@ const ProductViewModal = (props) => {
     const get_reference = (path) => {
         let ref = product
         for(let i = 0;i<path.length;i++){
+            if(ref === undefined || ref === null) return 'not set'
             ref = ref[path[i]]
         }
         return ref;

@@ -88,7 +88,7 @@ class Party extends Component {
         })
     }
 
-    showPartyViewModal = (index) => {
+    showPartyViewModal = (event,index) => {
         let party = [...this.state.party].filter(value => value.id===index)
         this.setState({
             partyViewModalShow: true,
