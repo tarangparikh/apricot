@@ -21,4 +21,8 @@ public class User {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column Long id;
     private @Column(unique = true) String email;
     private String passWord;
+    private String firstName;
+    private String lastName;
+    private Long contactNumber;
+    private String homeAddress;
 }
