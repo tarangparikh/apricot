@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, Button, Card} from 'react-bootstrap';
+import {Form, Button, Card, NavLink} from 'react-bootstrap';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import Constants from "../Constant/Constants";
@@ -89,9 +89,7 @@ class Login extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control required type="password" placeholder="Password" onChange={(event) => this.onChangeHandler(event,'passWord')} />
                             </Form.Group>
-                            <Form.Group controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" label="Check me out" />
-                            </Form.Group>
+                            <NavLink href="/signUp">Sign Up</NavLink>
                             <Button variant="primary" type="submit" >
                                 Submit
                             </Button>
