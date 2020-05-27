@@ -89,10 +89,10 @@ class Login extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control required type="password" placeholder="Password" onChange={(event) => this.onChangeHandler(event,'passWord')} />
                             </Form.Group>
-                            <NavLink href="/signUp">Sign Up</NavLink>
                             <Button variant="primary" type="submit" >
                                 Submit
                             </Button>
+			    <p> New <NavLink href="/signUp">Registration ?</NavLink>  </p>
                         </Form>
                     </Card.Body>
                 </Card>
