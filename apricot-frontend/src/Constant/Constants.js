@@ -17,7 +17,8 @@ const Constants = () => {
         },
         user:{
             authentication: api_base+api_user+ 'auth/',
-            postUser: api_base+api_user+'post/'
+            postUser: api_base+api_user+'post/',
+            viewUser: api_base + api_user
         },
         category:{
             //{company_id}
