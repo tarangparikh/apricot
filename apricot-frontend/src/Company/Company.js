@@ -220,7 +220,7 @@ class Company extends Component{
                                             {companyList}
                                         </tbody>
                                     </Table>
-
+                                    <Button href="/dashboard">Proceed to Dashboard</Button>
                                 </Card.Body>
                             </Card>
                     {companyViewModal}
