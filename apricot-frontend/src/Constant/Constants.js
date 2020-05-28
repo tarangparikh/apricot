@@ -6,6 +6,7 @@ const Constants = () => {
     const api_category = "category/";
     const api_product = "product/";
     const api_party = "party/";
+    const api_purchaseOrder = "purchaseOrder/"
     return {
         company: {
             //{user_id}
@@ -36,6 +37,11 @@ const Constants = () => {
             viewParty: api_base + api_party,
             postParty: api_base + api_party + 'post/',
             deleteParty: api_base + api_party + 'delete/'
+        },
+        purchase:{
+            //{company_id}
+            viewPurchaseOrder: api_base + api_purchaseOrder,
+            postPurchaseOrder: api_base + api_purchaseOrder + 'post/'
         }
     };
 }

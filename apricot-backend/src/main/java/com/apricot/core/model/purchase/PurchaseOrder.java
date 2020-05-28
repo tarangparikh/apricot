@@ -27,7 +27,7 @@ public class PurchaseOrder {
     @OneToOne Company company;
     Date purchaseOrderDate;
     String purchaseOrderNumber;
-    @OneToMany List<CartItem> cartItems;
+    @OneToMany(cascade = CascadeType.ALL) List<CartItem> cartItems;
     String paymentType;
     String description;
     String stateOfPurchase;

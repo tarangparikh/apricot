@@ -11,18 +11,61 @@ services:
       - MYSQL_DATABASE=apricot
     volumes:
       - db-data:/var/lib/mysql
+      
   web-service:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: tarangparikh/apricot:latest
     ports:
       - "80:8080"
     networks:
       - spring-boot-mysql-network
     depends_on:
+      - logstash
       - mysql-service
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.5.2
+    command: -f /etc/logstash/conf.d/
+    volumes:
+      - ./containers/logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
+      - ./logs/spring-boot-logger.log:/app.log
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    networks:
+      - spring-boot-mysql-network
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    depends_on:
+      - elastic-search
+
+  elastic-search:
+    image: elasticsearch:7.7.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+#    volumes:
+#      - ./containers/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - spring-boot-mysql-network
+    environment:
+      - discovery.type=single-node
+
+  elastic-kib:
+    image: kibana:7.7.0
+    ports:
+      - "5601:5601"
+    networks:
+      - spring-boot-mysql-network
+#    volumes:
+#      - ./containers/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+       ELASTICSEARCH_HOSTS: http://elastic-search:9200
+    depends_on:
+      - elastic-search
+
 volumes:
   db-data:
+  
 networks:
   spring-boot-mysql-network:
     driver: bridge

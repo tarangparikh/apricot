@@ -39,7 +39,7 @@ class DefaultNav extends Component{
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item eventKey="view.purchase.return">Purchase Return</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.purchase.order">Purchase Order</NavDropdown.Item>
+                                <NavDropdown.Item href="/purchase/order" eventKey="view.purchase.order">Purchase Order</NavDropdown.Item>
                                 <NavDropdown.Divider />
                             </NavDropdown>
 

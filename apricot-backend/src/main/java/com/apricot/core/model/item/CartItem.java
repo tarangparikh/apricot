@@ -25,7 +25,7 @@ public class CartItem {
     Double rate;
     Integer taxIncluded;
     Double discountRate;
-    @OneToOne Gst gst;
+    @OneToOne(cascade = CascadeType.ALL) Gst gst;
     Double additionalCess;
     @Transient Double subTotal;
     @Transient Double totalAmount;

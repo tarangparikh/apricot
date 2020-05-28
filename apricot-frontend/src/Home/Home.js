@@ -9,7 +9,8 @@ import Product from "../Items/Product/Product";
 import Service from "../Items/Service/Service";
 import Category from "../Items/Category/Category";
 import Unit from "../Items/Unit/Unit";
-import Party from "../party/Party";
+import Party from "../Party/Party";
+import Purchase from "../Purchase/Purchase";
 
 class Home extends Component {
     constructor(props) {
@@ -54,6 +55,7 @@ class Home extends Component {
         const item_service_component = () => <Service/>
         const item_category_component = () => <Category company={this.state.company}/>
         const item_unit_component = () => <Unit/>
+        const purchase_order = () => <Purchase company = {this.state.company} />
         const party_component = () => <Party company={this.state.company}/>
 
 
@@ -87,6 +89,7 @@ class Home extends Component {
                             <Route exact path="/item/service" component={item_service_component}/>
                             <Route exact path="/item/unit" component={item_unit_component}/>
                             <Route exact path="/item/category" component={item_category_component}/>
+                            <Route exact path="/purchase/order" component={purchase_order}/>
                             <Route exact path="/party" component={party_component}/>
                         </Switch>
                     </BrowserRouter>

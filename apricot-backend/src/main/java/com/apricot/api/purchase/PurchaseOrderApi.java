@@ -27,7 +27,7 @@ public class PurchaseOrderApi {
         return purchaseOrderRepository.findAllByCompany_Id(company_id);
     }
 
-    @GetMapping("/{party_id}")
+    @GetMapping("/party/{party_id}")
     public List<PurchaseOrder> getByParty_Id(@PathVariable Long party_id) {
         return purchaseOrderRepository.findAllByParty_Id(party_id);
     }
