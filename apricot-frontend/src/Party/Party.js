@@ -204,7 +204,7 @@ class Party extends Component {
         let partyList = this.makePartyList();
         let partyViewModal = this.makePartyViewModal();
         let partyUpdateModal = this.makePartyUpdateModal();
-        let partyAddModal = this.makePartyAddModal()
+        let partyAddModal = this.makePartyAddModal();
 
         return (
             <div>

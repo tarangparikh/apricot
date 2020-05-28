@@ -1,6 +1,7 @@
 package com.apricot.api.user;
 
 import com.apricot.core.business.repository.user.UserRepository;
+import com.apricot.core.model.party.Party;
 import com.apricot.core.model.user.User;
 import com.google.gson.Gson;
 import com.zaxxer.hikari.HikariDataSource;
@@ -21,7 +22,8 @@ import java.util.Optional;
     Email : tp0265@gmail.com
     Project Home : https://github.com/tarangparikh/apricot
     
-    Original Author : @author Tarang Parikh <tp0265@gmail.com>
+    Original Authors : @author Tarang Parikh <tp0265@gmail.com>
+                      @author Himani Bhardwaj <himanibhardwaj501@gmail.com>
     
 */
 @RestController
@@ -79,23 +81,26 @@ public class UserApi {
     }
 
     @PostMapping("/post")
-    public Long  postUser(@RequestBody User user){
-        return userRepository.save(user).getId();
+    public User addUser(@RequestBody User user) {
+        return userRepository.save(user);
     }
+//    public Long  postUser(@RequestBody User user){
+//        return userRepository.save(user).getId();
+//    }
 
-    @GetMapping("/random")
-    public Long insert(){
-        User user = new User();
-        user.setEmail("himani");
-        user.setPassWord("tarang");
-        User save = userRepository.save(user);
-        return save.getId();
-    }
-
-    @GetMapping("/bean")
-    public DataSource getByBean(String email){
-        return dataSource;
-    }
+//    @GetMapping("/random")
+//    public Long insert(){
+//        User user = new User();
+//        user.setEmail("himani");
+//        user.setPassWord("tarang");
+//        User save = userRepository.save(user);
+//        return save.getId();
+//    }
+//
+//    @GetMapping("/bean")
+//    public DataSource getByBean(String email){
+//        return dataSource;
+//    }
 }
 
 

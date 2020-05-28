@@ -36,9 +36,9 @@ services:
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     depends_on:
-      - elastic-search
+      - elasticsearch
 
-  elastic-search:
+  elasticsearch:
     image: elasticsearch:7.7.0
     ports:
       - "9200:9200"
@@ -59,9 +59,9 @@ services:
 #    volumes:
 #      - ./containers/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     environment:
-       ELASTICSEARCH_HOSTS: http://elastic-search:9200
+       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     depends_on:
-      - elastic-search
+      - elasticsearch
 
 volumes:
   db-data:

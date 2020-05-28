@@ -9,8 +9,10 @@ import Product from "../Items/Product/Product";
 import Service from "../Items/Service/Service";
 import Category from "../Items/Category/Category";
 import Unit from "../Items/Unit/Unit";
-import Party from "../Party/Party";
 import Purchase from "../Purchase/Purchase";
+import Party from "../Party/Party";
+import ViewProfile from "../Profile/ViewProfile";
+
 
 class Home extends Component {
     constructor(props) {
@@ -57,6 +59,7 @@ class Home extends Component {
         const item_unit_component = () => <Unit/>
         const purchase_order = () => <Purchase company = {this.state.company} />
         const party_component = () => <Party company={this.state.company}/>
+        const profile_viewProfile_component = () => <ViewProfile user={this.state.user}/>
 
 
         if(this.state.isAuthenticating){
@@ -91,6 +94,7 @@ class Home extends Component {
                             <Route exact path="/item/category" component={item_category_component}/>
                             <Route exact path="/purchase/order" component={purchase_order}/>
                             <Route exact path="/party" component={party_component}/>
+                            <Route exact path="/profile/viewProfile" component={profile_viewProfile_component}/>
                         </Switch>
                     </BrowserRouter>
                 </div>

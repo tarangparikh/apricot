@@ -77,10 +77,16 @@ class DefaultNav extends Component{
                             </NavDropdown>
 
                             <NavDropdown title="Profile" id="nav-company">
-                                <NavDropdown.Item eventKey="view.profile">View Profile</NavDropdown.Item>
+                                <NavDropdown.Item href="/profile/viewProfile" eventKey="view.Profile">View Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item eventKey="view.settings">Settings</NavDropdown.Item>
                             </NavDropdown>
+
+                            <Nav.Item>
+                                <Nav.Link eventKey="view.user" href="#/home">
+                                    Logout
+                                </Nav.Link>
+                            </Nav.Item>
 
                         </Nav>
                     </Navbar.Collapse>
