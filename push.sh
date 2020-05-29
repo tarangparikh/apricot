@@ -7,4 +7,4 @@ JENKINS_CRUMB=$(curl --silent --cookie-jar $COOKIE_JAR $JENKINS_URL'/crumbIssuer
 
 echo $JENKINS_CRUMB
 
-curl -I --cookie $COOKIE_JAR $JENKINS_URL/job/apricot-pipeline/build  -H $JENKINS_CRUMB -H "Content-Type:text/xml" -u $JENKINS_USER:$JENKINS_TOKEN -v
+curl -I --cookie $COOKIE_JAR $JENKINS_URL/job/apricot-pipeline/build/  -H $JENKINS_CRUMB -H "Content-Type:text/xml" -u $JENKINS_USER:$JENKINS_TOKEN -v

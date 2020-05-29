@@ -1,6 +1,6 @@
 
 const Constants = () => {
-    const api_base =  "api/";
+    const api_base =  "/api/";
     const api_company = "company/";
     const api_user = "user/";
     const api_category = "category/";
