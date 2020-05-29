@@ -51,11 +51,13 @@ public class UserApi {
         return userRepository.findAll();
     }
 
+    @GetMapping("/{user_id}")
+    public User getUser(@PathVariable Long user_id) {return userRepository.findById(user_id).get();}
+
     @GetMapping("/contains/{email}")
     public boolean containsEmail(@PathVariable String email){
         return userRepository.existsByEmail(email);
     }
-
     /*
         TODO : Write the JWT Tokens Code
      */
@@ -76,8 +78,8 @@ public class UserApi {
     }
 
     @GetMapping("/{email}")
-    public Optional<User> getByEmail(@PathVariable String email){
-        return userRepository.findByEmail(email);
+    public User getByEmail(@PathVariable String email){
+        return userRepository.findByEmail(email).get();
     }
 
     @PostMapping("/post")

@@ -1,0 +1,38 @@
+2020-05-29 11:33:44,167 INFO org.springframework.boot.StartupInfoLogger [main] Starting App on tarangparikh-G3-3579 with PID 18249 (/home/tarangparikh/Desktop/apricot/apricot-backend/target/classes started by tarangparikh in /home/tarangparikh/Desktop/apricot)
+2020-05-29 11:33:44,170 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+2020-05-29 11:33:44,171 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-05-29 11:37:40,938 INFO org.springframework.boot.StartupInfoLogger [main] Starting App on tarangparikh-G3-3579 with PID 5047 (/home/tarangparikh/Desktop/apricot/apricot-backend/target/classes started by tarangparikh in /home/tarangparikh/Desktop/apricot)
+2020-05-29 11:37:40,941 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+2020-05-29 11:37:40,943 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-05-29 11:37:42,247 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-05-29 11:37:42,495 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 224ms. Found 16 JPA repository interfaces.
+2020-05-29 11:37:43,401 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-05-29 11:37:43,412 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-05-29 11:37:43,413 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-05-29 11:37:43,414 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-05-29 11:37:43,523 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-05-29 11:37:43,524 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2408 ms
+2020-05-29 11:37:43,748 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-05-29 11:37:43,826 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.12.Final
+2020-05-29 11:37:44,093 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-05-29 11:37:44,207 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-05-29 11:37:44,720 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-05-29 11:37:44,747 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2020-05-29 11:37:47,092 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-05-29 11:37:47,108 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-05-29 11:37:47,999 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-05-29 11:37:48,389 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-29 11:37:48,503 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [static/index.html]
+2020-05-29 11:37:48,874 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-05-29 11:37:48,897 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-05-29 11:37:48,901 INFO org.springframework.boot.StartupInfoLogger [main] Started App in 8.91 seconds (JVM running for 9.924)
+2020-05-29 12:52:10,054 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-29 12:52:10,055 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-05-29 12:52:10,059 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 4 ms
+2020-05-29 15:32:50,453 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-3] Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Invalid JSON input: Cannot deserialize instance of `com.apricot.core.model.party.Party` out of START_ARRAY token; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of `com.apricot.core.model.party.Party` out of START_ARRAY token
+ at [Source: (PushbackInputStream); line: 1, column: 1671] (through reference chain: com.apricot.core.model.purchase.PurchaseOrder["party"])]
+2020-05-29 15:33:07,701 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-4] Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Invalid JSON input: Cannot deserialize instance of `com.apricot.core.model.party.Party` out of START_ARRAY token; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of `com.apricot.core.model.party.Party` out of START_ARRAY token
+ at [Source: (PushbackInputStream); line: 1, column: 1671] (through reference chain: com.apricot.core.model.purchase.PurchaseOrder["party"])]
+2020-05-29 15:34:50,754 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-8] Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Invalid JSON input: Cannot deserialize instance of `com.apricot.core.model.party.Party` out of START_ARRAY token; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of `com.apricot.core.model.party.Party` out of START_ARRAY token
+ at [Source: (PushbackInputStream); line: 93, column: 14] (through reference chain: com.apricot.core.model.purchase.PurchaseOrder["party"])]
+2020-05-29 15:36:07,920 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-1] Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]

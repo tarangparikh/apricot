@@ -61,7 +61,11 @@ class Login extends Component {
                                 .then(value => {
                                     if(value.data['key']){
                                         let user_clone = {...this.state.user}
+
                                         user_clone['id'] = value.data['value'];
+
+
+
                                         this.setState({
                                             user: user_clone
                                         })

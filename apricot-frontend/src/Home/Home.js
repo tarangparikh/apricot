@@ -89,8 +89,8 @@ class Home extends Component {
                             <Route exact path="/company" component={company_component} />
                             <Route exact path="/item" component={item_product_component} />
                             <Route exact path="/item/product" component={item_product_component}/>
-                            <Route exact path="/item/service" component={item_service_component}/>
-                            <Route exact path="/item/unit" component={item_unit_component}/>
+                            {/*<Route exact path="/item/service" component={item_service_component}/>*/}
+                            {/*<Route exact path="/item/unit" component={item_unit_component}/>*/}
                             <Route exact path="/item/category" component={item_category_component}/>
                             <Route exact path="/purchase/order" component={purchase_order}/>
                             <Route exact path="/party" component={party_component}/>

@@ -94,7 +94,7 @@ class ViewProfile extends Component {
 
         // let userList = this.makeUserList();
         // let userViewModal = this.makeUserViewModal();
-            alert(JSON.stringify(this.state.user))
+            //alert(JSON.stringify(this.state.user))
         return (
             <div>
                 <Container style={{ marginTop: "10px",}}>

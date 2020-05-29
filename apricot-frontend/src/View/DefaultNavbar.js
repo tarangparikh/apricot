@@ -21,33 +21,33 @@ class DefaultNav extends Component{
                                 </Nav.Link>
                             </Nav.Item>
 
-                            <NavDropdown title="Sale" id="nav-sale">
-                                <NavDropdown.Item eventKey="view.sale.invoice">Sale Invoice</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.payment.in">Payment In</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.sale.return">Sale Return</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.sale.order">Sale Order</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                            </NavDropdown>
+                            {/*<NavDropdown title="Sale" id="nav-sale">*/}
+                            {/*    <NavDropdown.Item eventKey="view.sale.invoice">Sale Invoice</NavDropdown.Item>*/}
+                            {/*    <NavDropdown.Divider />*/}
+                            {/*    <NavDropdown.Item eventKey="view.payment.in">Payment In</NavDropdown.Item>*/}
+                            {/*    <NavDropdown.Divider />*/}
+                            {/*    <NavDropdown.Item eventKey="view.sale.return">Sale Return</NavDropdown.Item>*/}
+                            {/*    <NavDropdown.Divider />*/}
+                            {/*    <NavDropdown.Item eventKey="view.sale.order">Sale Order</NavDropdown.Item>*/}
+                            {/*    <NavDropdown.Divider />*/}
+                            {/*</NavDropdown>*/}
 
                             <NavDropdown title="Purchase" id="nav-purchase">
-                                <NavDropdown.Item eventKey="view.purchase.invoice">Purchase Invoice</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.payment.out">Payment Out</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="view.purchase.return">Purchase Return</NavDropdown.Item>
-                                <NavDropdown.Divider />
+                                {/*<NavDropdown.Item eventKey="view.purchase.invoice">Purchase Invoice</NavDropdown.Item>*/}
+                                {/*<NavDropdown.Divider />*/}
+                                {/*<NavDropdown.Item eventKey="view.payment.out">Payment Out</NavDropdown.Item>*/}
+                                {/*<NavDropdown.Divider />*/}
+                                {/*<NavDropdown.Item eventKey="view.purchase.return">Purchase Return</NavDropdown.Item>*/}
+                                {/*<NavDropdown.Divider />*/}
                                 <NavDropdown.Item href="/purchase/order" eventKey="view.purchase.order">Purchase Order</NavDropdown.Item>
                                 <NavDropdown.Divider />
                             </NavDropdown>
 
-                            <Nav.Item>
-                                <Nav.Link eventKey="add.expence" href="#/home">
-                                    Expense
-                                </Nav.Link>
-                            </Nav.Item>
+                            {/*<Nav.Item>*/}
+                            {/*    <Nav.Link eventKey="add.expence" href="#/home">*/}
+                            {/*        Expense*/}
+                            {/*    </Nav.Link>*/}
+                            {/*</Nav.Item>*/}
 
                             <Nav.Item>
                                 <Nav.Link eventKey="view.party" href="/party">
@@ -55,19 +55,19 @@ class DefaultNav extends Component{
                                 </Nav.Link>
                             </Nav.Item>
 
-                            <Nav.Item>
-                                <Nav.Link eventKey="view.transaction" href="#/home">
-                                    Transaction
-                                </Nav.Link>
-                            </Nav.Item>
+                            {/*<Nav.Item>*/}
+                            {/*    <Nav.Link eventKey="view.transaction" href="#/home">*/}
+                            {/*        Transaction*/}
+                            {/*    </Nav.Link>*/}
+                            {/*</Nav.Item>*/}
 
                             <NavDropdown title="Item" id="nav-item">
                                 <NavDropdown.Item href="/item/product" eventKey="view.product">Product</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/item/service" eventKey="view.services">Services</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/item/unit" eventKey="view.Units">Units</NavDropdown.Item>
-                                <NavDropdown.Divider />
+                                {/*<NavDropdown.Item href="/item/service" eventKey="view.services">Services</NavDropdown.Item>*/}
+                                {/*<NavDropdown.Divider />*/}
+                                {/*<NavDropdown.Item href="/item/unit" eventKey="view.Units">Units</NavDropdown.Item>*/}
+                                {/*<NavDropdown.Divider />*/}
                                 <NavDropdown.Item href="/item/category" eventKey="view.Category">Category</NavDropdown.Item>
                                 <NavDropdown.Divider />
                             </NavDropdown>

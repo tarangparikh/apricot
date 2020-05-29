@@ -14,10 +14,14 @@ class Purchase extends Component{
             company: props.company,
             party: [],
             product:[],
-            addProduct:{},
+            addProduct:{
+                cartItems:[],
+                company: props.company,
+            },
             purchaseOrder:[],
             currentPurchaseOrder: undefined,
-            activeBar: "order"
+            activeBar: "order",
+            validated: false
         }
         this.formData = {
             details:[
@@ -30,6 +34,22 @@ class Purchase extends Component{
                 {name:"Recieved Amount",access: ["receivedAmount"]},
                 {name:"Total Amount",access: ["totalAmount"]},
                 {name:"Balance Due",access: ["balanceDue"]}
+            ]
+        }
+
+        this.cart_item_data = {
+            details: [
+                {name: "Product Name",access:["item","productName"]},
+                {name: "Item Code",access:["item","itemCode"]},
+                {name: "Category",access:["item","category","categoryName"]},
+                {name: "Quantity",access:["quantity"]},
+                {name: "Free Quantity",access:["freeQuantity"]},
+                {name: "Rate",access:["rate"]},
+                {name: "Additional Cess",access: ["additionalCess"]},
+                {name: "Sub Total",access: ["subTotal"]},
+                {name: "Discount Rate",access: ["discountRate"]},
+                {name: "Discount Amount",access: ["discountAmount"]},
+                {name: "Total Amount",access: ["totalAmount"]}
             ]
         }
 
@@ -52,7 +72,30 @@ class Purchase extends Component{
                     })
             })
     }
+    handleSubmit = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+        }else{
+            axios.post(this.state.api_store.purchase.postPurchaseOrder,this.state.addProduct)
+                .then(value => {
+                    alert('Order Added')
+                    let new_order = value.data;
+                    let clone_order = [...this.state.purchaseOrder];
+                    clone_order.push(new_order);
+                    this.setState({
+                        purchaseOrder : clone_order
+                    })
+                }).catch(reason => {
+                    alert(JSON.stringify(reason))
+            })
 
+        }
+        this.setState({
+            validated: true
+        })
+    }
     showViewModal = (event,index) => {
         let purchaseOrder = [...this.state.purchaseOrder].filter(value => value.id === index);
         this.setState({
@@ -75,10 +118,19 @@ class Purchase extends Component{
             addModalShow: false
         })
     }
-
+    onCartItemAdd = (cartItem) => {
+        //alert(JSON.stringify(cartItem))
+        let array = [...this.state.addProduct.cartItems]
+        array.push(cartItem)
+        let obj = {cartItems: array}
+        this.setState({
+            addProduct: {...this.state.addProduct,...obj}
+        })
+        //alert(JSON.stringify(this.state.addProduct))
+    }
     onPartyChangeHandler = (event) => {
         if(event.target.value === '--none') return
-        let party = [...this.state.party].filter(value => value.id === parseInt(event.target.value))
+        let party = [...this.state.party].filter(value => value.id === parseInt(event.target.value))[0]
         let obj = {party: party}
         this.setState({
             addProduct: {...this.state.addProduct,...obj}
@@ -97,6 +149,68 @@ class Purchase extends Component{
             activeBar: eventKey
         })
     }
+    get_ref = (data,path) => {
+        let ref = data
+        for(let i = 0;i<path.length;i++){
+            if(ref === undefined || ref === null) return 'not set'
+            ref = ref[path[i]]
+        }
+        return ref;
+    }
+    make_item = (cartItem) => {
+        const makeData = this.cart_item_data['details'].map(value => {
+            return(
+                <tr>
+                    <td>{value['name']}</td>
+                    <td>{this.get_ref(cartItem,value['access'])}</td>
+                </tr>
+
+            )
+
+        })
+        return(
+            <Table>
+                <thead>
+                <thead>
+                <tr>
+                    <th colSpan={"2"}>
+                        {cartItem.item.productName}
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                </thead>
+                <tbody>
+                {makeData}
+                </tbody>
+            </Table>
+        )
+    }
+    make_cart_items = () => {
+        let cartItems = this.state.addProduct.cartItems;
+
+        let cartItems_Row = cartItems.map(cartItem => {
+            return(
+                this.make_item(cartItem)
+            )
+        })
+        return(
+            <div>
+                <Table>
+                    <thead>
+                    <tr>
+                        <th colSpan = "2" >Cart Items</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {cartItems_Row}
+                    </tbody>
+                </Table>
+            </div>
+        )
+    }
+
     makeAdd = () => {
         let partyOptions = [<option value = "--none" >--None--</option>]
         const temp = this.state.party.map(party => {
@@ -104,13 +218,14 @@ class Purchase extends Component{
         })
         partyOptions = [...partyOptions,...temp];
         return(
-           <div>
+           <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
                <Table>
                    <thead>
                    <tr>
                        <th colSpan={"2"}>Details</th>
                    </tr>
                    </thead>
+
                    <tbody>
                         <tr>
                             <td>
@@ -246,14 +361,17 @@ class Purchase extends Component{
                        <tr>
                            <th>
                                 Add Items
-                           </th>
-                           <th>
                                <Button onClick={this.showAddModal} style={{float : "right"}}>Add</Button>
                            </th>
+
                        </tr>
                    </thead>
+                   <tbody>
+                   {this.make_cart_items()}
+                   </tbody>
                </Table>
-           </div>
+               <Button type="submit">Add</Button>
+           </Form>
         )
     }
     makeList = () => {
@@ -314,7 +432,8 @@ class Purchase extends Component{
     makeAddModal = () => {
         return <ItemAdd
             show = {this.state.addModalShow}
-
+            products = {this.state.product}
+            addHandler = {this.onCartItemAdd}
             closeHandler = {this.closeAddModal}
     />
     }
