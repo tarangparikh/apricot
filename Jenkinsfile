@@ -63,5 +63,21 @@ pipeline {
           }
         }
         
+        stage('Deploy Docker Image to Node 1 via Rundeck'){
+            agent any
+                steps{
+                    script{
+                        step([$class: "RundeckNotifier",
+                        includeRundeckLogs: true,
+                        jobId: "1be3f733-c661-495d-bf2e-b28bd67b2f80",
+                        rundeckInstance: "Rundeck",
+                        shouldFailTheBuild: true,
+                        shouldWaitForRunDeckJob: true,
+                        tailLog:true])
+                    }
+                }
+            
+        }
+        
     }
 }
