@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 import com.apricot.api.user.UserApi;
 import com.apricot.configuration.ConfigurationTest;
 
+import com.apricot.core.business.repository.Item.ProductRepository;
+import com.apricot.core.business.repository.company.CompanyRepository;
+import com.apricot.core.business.repository.user.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,11 +27,26 @@ public class AppTest
     /**
      * Rigorous Test :-)
      */
-//    @Autowired
-//    UserApi userApi;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    ProductRepository productRepository;
+    @Autowired
+    CompanyRepository companyRepository;
 
     @Test
     public void contexLoads() throws Exception {
-//        Assert.assertNotNull(userApi);
+        userRepository.findAll();
     }
+
+    @Test
+    public void contexLoads1() throws Exception {
+        productRepository.findAll();
+    }
+
+    @Test
+    public void contexLoads2() throws Exception {
+        companyRepository.findAll();
+    }
+
 }
