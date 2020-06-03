@@ -1,2 +1,2 @@
-# apricot systems backend
+# apricot systems backend parita
 Open Source Business Management Suite
