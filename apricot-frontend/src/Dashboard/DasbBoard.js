@@ -10,7 +10,7 @@ class DashBoard extends Component{
     render() {
         return(
             <div>
-               DashBoard
+               DashBoard Updated
             </div>
         )
     }
