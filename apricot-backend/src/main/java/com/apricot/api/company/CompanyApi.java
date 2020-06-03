@@ -15,6 +15,8 @@ import com.apricot.core.business.repository.user.UserRepository;
 import com.apricot.core.model.company.Company;
 
 import com.apricot.core.model.user.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/company")
 public class CompanyApi {
+    private final Logger logger = LogManager.getLogger(CompanyApi.class);
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
     public CompanyApi(CompanyRepository companyRepository, UserRepository userRepository) {
@@ -35,6 +38,7 @@ public class CompanyApi {
 
     @GetMapping("/")
     public List<Company> getAll(){
+        logger.info("Get All Called");
         return companyRepository.findAll();
     }
 

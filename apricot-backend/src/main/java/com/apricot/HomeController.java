@@ -18,6 +18,7 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/company/**", "/dashboard/**","/login/**","/item/**","/purchase/**",
                 "/party/**" , "/signUp/**" ,"/profile/**"})
+
     public String index() {
         return "/index.html";
     }
