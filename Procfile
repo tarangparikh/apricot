@@ -1,0 +1,1 @@
+java $JAVA_OPTS -jar ./apricot-backend/target/apricot.jar --server.port=$PORT
