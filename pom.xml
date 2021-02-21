@@ -7,8 +7,12 @@
   <packaging>pom</packaging>
   <name>apricot</name>
   <modules>
+    <module>apricot-frontend</module>
     <module>apricot-backend</module>
   </modules>
+  <properties>
+    <main.basedir>${project.basedir}</main.basedir>
+  </properties>
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -53,6 +57,29 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
+    <plugins>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <id>position-react-build</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${main.basedir}/apricot-frontend/build</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>

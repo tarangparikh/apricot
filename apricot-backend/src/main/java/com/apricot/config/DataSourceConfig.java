@@ -1,6 +1,5 @@
 package com.apricot.config;
 
-import org.graalvm.compiler.code.DataSection;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
