@@ -1,0 +1,1 @@
+web: java -jar ./apricot-backend/target/apricot.jar --server.port=$PORT
